@@ -3,7 +3,6 @@ pragma solidity >=0.4.22 <0.9.0;
 
 import "@openzeppelin/contracts/ownership/Ownable.sol";
 import "@openzeppelin/contracts/lifecycle/Pausable.sol";
-import "@openzeppelin/contracts/lifecycle/Pausable.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
 
 /// @title Devoleum
@@ -15,16 +14,18 @@ contract Devoleum is Ownable, Pausable {
 
     //STRUCTS
 
-    struct Step {
+    struct User {
         uint256 createdAt;
         string mongoID;
         address owner;
     }
 
-    struct User {
+    struct Step {
         uint256 createdAt;
         string mongoID;
         address owner;
+        string hashOfJson;
+
     }
 
     //COUNTERS
@@ -36,6 +37,11 @@ contract Devoleum is Ownable, Pausable {
 
     //PERMISSION
     mapping(address => bool) public userPermission;
+
+    constructor() internal {
+        userPermission[owner()] = true;
+    }
+
 
     /// @notice Toggle User permission for write ops in this smart contract
     /// @param _permission Toggle permission
@@ -106,7 +112,7 @@ contract Devoleum is Ownable, Pausable {
         returns (uint256 stepID)
     {
         Step memory newStep =
-            Step(now, msg.sender, true, _hashOfJson, _mongoID);
+            Step(now, _mongoID, msg.sender, _hashOfJson);
         stepsCounter = stepsCounter.add(1);
         stepIdToStepInfo[stepsCounter] = newStep;
         emit StepCreated(msg.sender, stepsCounter);
@@ -137,16 +143,16 @@ contract Devoleum is Ownable, Pausable {
         view
         returns (
             uint256 createdAt,
+            string memory mongoID,
             address userAdr,
-            string memory hashOfJson,
-            string memory mongoID
+            string memory hashOfJson
         )
     {
         return (
             stepIdToStepInfo[_id].createdAt,
-            stepIdToStepInfo[_id].userAdr,
-            stepIdToStepInfo[_id].hashOfJson,
-            stepIdToStepInfo[_id].mongoID
+            stepIdToStepInfo[_id].mongoID,
+            stepIdToStepInfo[_id].owner,
+            stepIdToStepInfo[_id].hashOfJson
         );
     }
 }
