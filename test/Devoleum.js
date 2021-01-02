@@ -19,7 +19,7 @@ contract("Devoleum", (accounts) => {
     assert.equal(await devoleum.paused(), false);
   });
 
-  it("Should not pause the contract if not the owner", async () => {
+  it("Should NOT pause the contract if not the owner", async () => {
     const devoleum = await Devoleum.deployed();
     let user = accounts[1];
     await truffleAssert.reverts(
