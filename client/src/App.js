@@ -10,10 +10,12 @@ import { GetContract } from "./SmartContract";
 const App = (props) => {
   const [web3, setWeb3] = useState(null);
   const [contract, setContract] = useState(null);
+  const [token, setToken] = useState(null);
 
   useEffect(() => {
     setWeb3Task();
     console.log("fired");
+    setToken(JSON.parse(localStorage.getItem('userInfo')).token);
   }, []);
 
   const setWeb3Task = async () => {
@@ -22,12 +24,22 @@ const App = (props) => {
     setContract(await GetContract(web3));
   };
 
+  const getToken = (text) => {
+    setToken(text);
+  };
   return (
     <div>
+      <h2>Verify</h2>
+      <Verifier web3={web3} contract={contract} />
+      <hr></hr>
       <h2>Notarize</h2>
-      <Login />
-      <Notarize web3={web3} contract={contract} />
-      <NotarizeMany web3={web3} contract={contract} />
+      <Login changeToken={getToken} />
+      {token && contract && (
+        <div>
+          <Notarize web3={web3} contract={contract} />
+          <NotarizeMany web3={web3} contract={contract} />
+        </div>
+      )}
     </div>
   );
 };

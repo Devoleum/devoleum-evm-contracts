@@ -2,10 +2,7 @@ import { h } from "preact";
 import { useState, useEffect } from "preact/hooks";
 import { keccak } from "hash-wasm";
 
-const Notarize = (props) => {
-  useEffect(() => {
-    console.log("fired");
-  }, []);
+const Login = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,10 +18,9 @@ const Notarize = (props) => {
       }
     );
     let data = await response.json();
-    console.log("fired login: ", data );
     localStorage.setItem('userInfo', JSON.stringify(data))
     let token = JSON.parse(localStorage.getItem('userInfo')).token
-    console.log("fired login: ", token );
+    if(token) props.changeToken(token);
   };
 
   return (
@@ -66,4 +62,4 @@ const Notarize = (props) => {
   );
 };
 
-export default Notarize;
+export default Login;

@@ -4,7 +4,8 @@ import { keccak } from "hash-wasm";
 
 const Verifier = (props) => {
   const [step, setStep] = useState(null);
-  const [txMessage, setTxMessage] = useState(null);
+  const [proof, setProof] = useState(null);
+  const [message, setMessage] = useState(null);
 
   useEffect(() => {
     console.log("fired");
@@ -22,8 +23,21 @@ const Verifier = (props) => {
       step.randomizeProof
     );
     setStep(step);
+    await getProof(step.calcHash)
   };
+  const getProof = async (hashJson) => {
+    const arrayId = await props.contract.methods
+    .hashToId(hashJson)
+    .call()
 
+    const blockchainStep = await props.contract.methods
+    .stepIdToStepInfo(arrayId)
+    .call()
+
+    await setProof(blockchainStep[1])
+    await setMessage(hashJson.toString() === blockchainStep[1].toString() ? <div style={{color: "green"}}>Success, exact match!</div> : <div style={{color: "red"}}>Epic fail, are not the same!</div>)
+
+  }
   const getData = async (url) => {
     try {
       const res = await fetch(url);
@@ -43,22 +57,11 @@ const Verifier = (props) => {
     return hash;
   };
 
-  const notarizeProof = async () => {
-    console.log("get hash: ", step.calcHash)
-  
-    const accounts = await props.web3.eth.getAccounts();
-    await props.contract.methods
-      .getStepProofInfo(step.calcHash)
-      .send({ from: accounts[0] })
-      .then(function (receipt) {
-        setTxMessage(receipt.transactionHash)
-      });
-  };
 
   return (
     <div class="row">
       <div class="six columns">
-        <h4>1. Check Step ID</h4>
+        <h4>1. Insert Step ID</h4>
         <p>Here you can verify notarized proofs</p>
         <form onSubmit={handleSubmit}>
           <div class="row">
@@ -83,24 +86,20 @@ const Verifier = (props) => {
       </div>
       {step && (
         <div class="six columns" id="stepContainer">
-          <h4>2. Notarize</h4>
+          <h4>2. Check</h4>
+          <strong>{message}</strong>
           <ul>
-            <li id="name">{step.name}</li>
-            <li id="random">{step.randomizeProof}</li>
+            <li>{step.name}</li>
+            <li>{step.randomizeProof}</li>
             <li>
               Calc Hash (JSON stringify + random):{" "}
               <p id="calchash" style="word-break: break-all">{step.calcHash}</p>
             </li>
+            <li>
+              Blockchain proof:{" "}
+              <p id="calchash" style="word-break: break-all">{proof}</p>
+            </li>
           </ul>
-          <input
-            class="button-primary"
-            style="background-color: darkred; border-color: darkred;"
-            type="button"
-            id="btnnotarize"
-            value="Notarize"
-            onClick={() => notarizeProof()}
-          />
-          <div>{txMessage}</div>
         </div>
       )}
     </div>

@@ -7,8 +7,8 @@ const Notarize = (props) => {
   const [txMessage, setTxMessage] = useState("empty");
 
   useEffect(() => {
-    console.log("fired");
-  }, []);
+    console.log("fired: ", props.contract);
+  }, [props.contract]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,22 +45,24 @@ const Notarize = (props) => {
   const notarizeProof = async () => {
     const accounts = await props.web3.eth.getAccounts();
     console.log("get hash: ", step.calcHash);
-    await props.contract.methods
-      .createStepProof(step.calcHash)
-      .send({ from: accounts[0] })
+    await props.web3.eth.sendTransaction({
+        from: accounts[0],
+        to: props.contract._address,
+        data: props.contract.methods.createStepProof(step.calcHash).encodeABI()
+    }).then(receipt => console.log('receipt', receipt))
   };
 
   return (
-    <div class="row">
-      <div class="six columns">
+    <div className="row">
+      <div className="six columns">
         <h4>1. Get Info</h4>
         <p>Here the admin can notarize proofs</p>
         <form onSubmit={handleSubmit}>
-          <div class="row">
-            <div class="six columns">
+          <div className="row">
+            <div className="six columns">
               <label for="exampleEmailInput">Step id</label>
               <input
-                class="u-full-width"
+                className="u-full-width"
                 type="text"
                 placeholder=""
                 id="stepId"
@@ -69,7 +71,7 @@ const Notarize = (props) => {
             </div>
           </div>
           <input
-            class="button-primary"
+            className="button-primary"
             type="submit"
             id="getInfo"
             value="Get Info"
@@ -77,7 +79,7 @@ const Notarize = (props) => {
         </form>
       </div>
       {step && (
-        <div class="six columns" id="stepContainer">
+        <div className="six columns" id="stepContainer">
           <h4>2. Notarize</h4>
           <ul>
             <li id="name">{step.name}</li>
@@ -90,7 +92,7 @@ const Notarize = (props) => {
             </li>
           </ul>
           <input
-            class="button-primary"
+            className="button-primary"
             style="background-color: darkred; border-color: darkred;"
             type="button"
             id="btnnotarize"

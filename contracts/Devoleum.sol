@@ -21,7 +21,14 @@ contract Devoleum is Ownable {
 
     //STRUCT MAPPINGS
     mapping(uint256 => Step) public stepIdToStepInfo;
+    mapping(string => uint256) public hashToId;
     event StepProofCreated(uint256 _id, string _hash);
+
+    //Modifiers
+    modifier noDuplicate(string memory _hashOfJson) {
+        require(hashToId[_hashOfJson] == 0, "duplicate");
+        _;
+    }
 
     /// @notice Notarizes a supply chain Step Proof
     /// @param _hashOfJson The hash proof of the JSON file
@@ -29,29 +36,14 @@ contract Devoleum is Ownable {
     function createStepProof(string calldata _hashOfJson)
         external
         onlyOwner
+        noDuplicate(_hashOfJson)
         returns (uint256 stepID)
     {
         Step memory newStep = Step(now, _hashOfJson);
         stepsCounter = stepsCounter.add(1);
         stepIdToStepInfo[stepsCounter] = newStep;
+        hashToId[_hashOfJson] = stepsCounter;
         emit StepProofCreated(stepsCounter, _hashOfJson);
         return stepsCounter;
-    }
-
-    /// @notice Get the Step Info by a given array id
-    /// @param _id The numeric id of the Step in the array
-    /// @return the Step Info
-    function getStepProofInfo(uint256 _id)
-        external
-        view
-        returns (
-            uint256 createdAt,
-            string memory hashOfJson
-        )
-    {
-        return (
-            stepIdToStepInfo[_id].createdAt,
-            stepIdToStepInfo[_id].hashOfJson
-        );
     }
 }
