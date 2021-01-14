@@ -46,6 +46,12 @@ module.exports = {
       skipDryRun: true
     }
   },
+  plugins: [
+    'truffle-plugin-verify'
+  ],
+  api_keys: {
+    etherscan: process.env.ETHERSCAN_API
+  },
   contracts_build_directory: path.join(__dirname, "client/src/contracts")
 
 
