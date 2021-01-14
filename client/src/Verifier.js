@@ -5,39 +5,45 @@ import { keccak } from "hash-wasm";
 const Verifier = (props) => {
   const [step, setStep] = useState(null);
   const [proof, setProof] = useState(null);
+  const [proofDate, setProofDate] = useState(null);
   const [message, setMessage] = useState(null);
 
   useEffect(() => {
     console.log("fired");
   }, []);
 
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { stepId } = e.target.elements;
-    let step = await getData(`${process.env.API_BASE_URL}/api/steps/${stepId.value}`);
+    let step = await getData(
+      `${process.env.API_BASE_URL}/api/steps/${stepId.value}`
+    );
     const jsonContent = await getData(step.uri);
     step.calcHash = await calcHash(
       JSON.stringify(jsonContent),
       step.randomizeProof
     );
     setStep(step);
-    await getProof(step.calcHash)
+    await getProof(step.calcHash);
   };
   const getProof = async (hashJson) => {
-    const arrayId = await props.contract.methods
-    .hashToId(hashJson)
-    .call()
+    const arrayId = await props.contract.methods.hashToId(hashJson).call();
 
     const blockchainStep = await props.contract.methods
-    .stepIdToStepInfo(arrayId)
-    .call()
+      .stepIdToStepInfo(arrayId)
+      .call();
 
-    await setProof(blockchainStep[1])
-    await setMessage(hashJson.toString() === blockchainStep[1].toString() ? <div style={{color: "green"}}>Success, exact match!</div> : <div style={{color: "red"}}>Epic fail, are not the same!</div>)
-
-  }
+    console.log(blockchainStep)
+    await setProof(blockchainStep[1]);
+    await setProofDate(new Date(blockchainStep[0] * 1000).toISOString());
+    await setMessage(
+      hashJson.toString() === blockchainStep[1].toString() ? (
+        <div style={{ color: "green" }}>Success, exact match!</div>
+      ) : (
+        <div style={{ color: "red" }}>Epic fail, are not the same!</div>
+      )
+    );
+  };
   const getData = async (url) => {
     try {
       const res = await fetch(url);
@@ -56,7 +62,6 @@ const Verifier = (props) => {
     const hash = await keccak(content + random, 256);
     return hash;
   };
-
 
   return (
     <div class="row">
@@ -93,11 +98,15 @@ const Verifier = (props) => {
             <li>{step.randomizeProof}</li>
             <li>
               Calc Hash (JSON stringify + random):{" "}
-              <p id="calchash" style="word-break: break-all">{step.calcHash}</p>
+              <p id="calchash" style="word-break: break-all">
+                {step.calcHash}
+              </p>
             </li>
             <li>
-              Blockchain proof:{" "}
-              <p id="calchash" style="word-break: break-all">{proof}</p>
+              Blockchain proof({proofDate}):{" "}
+              <p id="calchash" style="word-break: break-all">
+                {proof}
+              </p>
             </li>
           </ul>
         </div>
