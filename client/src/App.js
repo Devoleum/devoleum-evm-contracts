@@ -63,7 +63,7 @@ const App = (props) => {
         >
           Metamask browser extension (Rinkeby network)
         </a>{" "}
-        and a CORS enabler extension{" "}
+        and a CORS enabler extension{" "}(
         <a
           href="https://addons.mozilla.org/en-US/firefox/addon/cors-everywhere/"
           target="_blank"
