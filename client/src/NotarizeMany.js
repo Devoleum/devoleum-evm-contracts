@@ -102,7 +102,6 @@ const NotarizeMany = (props) => {
                 type="text"
                 placeholder=""
                 id="historyId"
-                value="5ffb87240fd1c30004878d7e"
               />
             </div>
           </div>

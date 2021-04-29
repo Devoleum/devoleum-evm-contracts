@@ -66,7 +66,6 @@ const Notarize = (props) => {
                 type="text"
                 placeholder=""
                 id="stepId"
-                value="5ffb9399b44b660004ba402c"
               />
             </div>
           </div>
