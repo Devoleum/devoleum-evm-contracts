@@ -61,21 +61,8 @@ const App = (props) => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Metamask browser extension (Rinkeby network)
-        </a>{" "}
-        and a CORS enabler extension{" "}(
-        <a
-          href="https://addons.mozilla.org/en-US/firefox/addon/cors-everywhere/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          like CORS Everywhere
+          Metamask browser extension (Rinkeby network).
         </a>
-        , we will fix that ASAP,         <a
-          href="https://github.com/Devoleum/devoleum-eth-notarization-muninn"
-          target="_blank"
-          rel="noopener noreferrer"
-        >feel free to open an issue</a>)
       </div>
       <h2>Verify</h2>
       <Verifier web3={web3} contract={contract} />
