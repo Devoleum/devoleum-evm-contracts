@@ -1,11 +1,10 @@
-import { h, FunctionalComponent } from "preact";
-import { useState, useEffect } from "preact/hooks";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import GetWeb3 from "./GetWeb3";
 import Verifier from "./Verifier";
-import Notarize from "./Notarize";
-import Login from "./Login";
-import NotarizeMany from "./NotarizeMany";
 import { GetContract } from "./SmartContract";
+import Header from "./Header";
+import Notarize from "./Notarize";
 
 const App = (props) => {
   const [web3, setWeb3] = useState(null);
@@ -28,53 +27,36 @@ const App = (props) => {
     setToken(text);
   };
   return (
-    <div>
-      <div>
-        <a
-          href="https://devoleum.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Devoleum
-        </a>{" "}
-        is a{" "}
-        <a
-          href="https://github.com/Devoleum"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          open source
-        </a>{" "}
-        web app that organizes data from physical or digital supply chains into
-        authentic stories. Thanks to Devoleum it is possible to notarize the
-        steps of a supply chain in an immutable way on blockchains and other
-        distributed systems, using cryptographic hashes that allow data
-        verification and a high degree of privacy. Each story shows in a clear
-        and detailed way the steps that contributed to making the product unique
-        and precious. Here you can verify the stories showed on our platform. It's possible to notarize steps if you have the permission.
-      </div>
-      <br />
-      <div>
-        In order to make it work you need to have the{" "}
-        <a
-          href="https://metamask.io/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Metamask browser extension (Rinkeby network).
-        </a>
-      </div>
-      <h2>Verify</h2>
-      <Verifier web3={web3} contract={contract} />
-      <hr></hr>
-      <h2>Notarize</h2>
-      <Login changeToken={getToken} />
-      {token && contract && (
+    <div className="container">
+      <h1 className="title">Devoleum - Ethereum Verifier</h1>
+      <Router>
+        <nav>
+          <Link to="/">Verifier</Link> | <Link to="/notarizer">Notarizer</Link>
+        </nav>
+        <Header />
         <div>
-          <Notarize web3={web3} contract={contract} />
-          <NotarizeMany web3={web3} contract={contract} />
+          In order to make it work you need to have the{" "}
+          <a
+            href="https://metamask.io/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Metamask browser extension (Rinkeby network).
+          </a>
         </div>
-      )}
+        <br />
+        <Switch>
+          <Route path="/notarizer">
+            <Notarize />
+          </Route>
+          <Route path="/:id?">
+            <Verifier web3={web3} contract={contract} />
+          </Route>
+          <Route>
+            <h2 className="title">404 not found</h2>
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 };

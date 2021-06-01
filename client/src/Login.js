@@ -1,5 +1,5 @@
-import { h } from "preact";
-import { useState, useEffect } from "preact/hooks";
+import React, { useState, useEffect } from "react";
+
 import { keccak } from "hash-wasm";
 
 const Login = (props) => {

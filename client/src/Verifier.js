@@ -1,5 +1,5 @@
-import { h } from "preact";
-import { useState, useEffect } from "preact/hooks";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { keccak } from "hash-wasm";
 
 const Verifier = (props) => {
@@ -7,17 +7,17 @@ const Verifier = (props) => {
   const [proof, setProof] = useState(null);
   const [proofDate, setProofDate] = useState(null);
   const [message, setMessage] = useState(null);
+  const [ethHash, setEthHash] = useState(null);
+  const [error, setError] = useState(null);
+  let { id = null } = useParams();
+  const [itemId, setItemId] = useState(id);
 
   useEffect(() => {
     console.log("fired");
   }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const { stepId } = e.target.elements;
-    let step = await getData(
-      `${process.env.API_BASE_URL}/api/steps/${stepId.value}`
-    );
+  const getDevoleumStep = async () => {
+    let step = await getData(`${process.env.API_BASE_URL}/api/steps/${itemId}`);
     const jsonContent = await getData(step.uri);
     step.calcHash = await calcHash(
       JSON.stringify(jsonContent),
@@ -33,7 +33,7 @@ const Verifier = (props) => {
       .stepIdToStepInfo(arrayId)
       .call();
 
-    console.log(blockchainStep)
+    console.log(blockchainStep);
     await setProof(blockchainStep[1]);
     await setProofDate(new Date(blockchainStep[0] * 1000).toISOString());
     await setMessage(
@@ -44,6 +44,7 @@ const Verifier = (props) => {
       )
     );
   };
+
   const getData = async (url) => {
     try {
       const res = await fetch(url);
@@ -64,51 +65,74 @@ const Verifier = (props) => {
   };
 
   return (
-    <div class="row">
-      <div class="six columns">
-        <h4>1. Insert Step ID</h4>
-        <p>Here you can verify notarized proofs</p>
-        <form onSubmit={handleSubmit}>
-          <div class="row">
-            <div class="six columns">
-              <label for="exampleEmailInput">Step id</label>
-              <input
-                class="u-full-width"
-                type="text"
-                placeholder=""
-                id="stepId"
-                value="5ffb9399b44b660004ba402c"
-              />
+    <div>
+      <div>
+        <span className="label">Please insert the Step ID</span>
+      </div>
+      <input
+        className="input"
+        type="text"
+        onChange={(e) => setItemId(e.target.value)}
+        value={itemId}
+      />
+      <div>
+        <button className="button" onClick={() => getDevoleumStep()}>
+          Verify Step
+        </button>
+      </div>
+      <span>{error}</span>
+      <br />
+      <br />
+      {proof && (
+        <div>
+          <div className="tab-with-corner">
+            Devoleum Step{" - "}
+            {proof === step.calcHash ? (
+              <span style={{ color: " #44f1a6" }}>Matching</span>
+            ) : (
+              <span style={{ color: "red" }}>Not Matching</span>
+            )}
+          </div>
+          <div className="boxed">
+            <div>
+              <span className="label">Step ID: </span>
+              {step._id}
+            </div>
+            <div>
+              <span className="label">Step name: </span>
+              <a
+                href={"https://app.devoleum.com/step/" + step._id}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {step.name}
+              </a>
+            </div>
+            <div>
+              <span className="label">JSON hash: </span>
+              {step.calcHash}
+            </div>
+            <div>
+              <span className="label">Ethereum hash: </span>
+              {proof}
+            </div>
+            <div>
+              <span className="label">Ethereum tx: </span>
+              <a
+                href={step.test_eth_notarization}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {step.test_eth_notarization}
+              </a>
+            </div>
+            <div>
+              <span className="label">JSON link: </span>
+              <a href={step.uri} target="_blank" rel="noopener noreferrer">
+                {step.uri}
+              </a>
             </div>
           </div>
-          <input
-            class="button-primary"
-            type="submit"
-            id="getInfo"
-            value="Verify"
-          />
-        </form>
-      </div>
-      {step && (
-        <div class="six columns" id="stepContainer">
-          <h4>2. Check</h4>
-          <strong>{message}</strong>
-          <ul>
-            <li>{step.name}</li>
-            <li>{step.randomizeProof}</li>
-            <li>
-              Calc Hash (JSON stringify + random):{" "}
-              <p id="calchash" style="word-break: break-all">
-                {step.calcHash}
-              </p>
-            </li>
-            <li>
-              Blockchain proof({proofDate}):{" "}
-              <p id="calchash" style="word-break: break-all">
-                {proof}
-              </p>
-            </li>
-          </ul>
         </div>
       )}
     </div>

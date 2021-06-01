@@ -1,5 +1,4 @@
-import { h } from "preact";
-import { useState, useEffect } from "preact/hooks";
+import React, { useState, useEffect } from "react";
 import { keccak } from "hash-wasm";
 
 const NotarizeMany = (props) => {
@@ -89,24 +88,25 @@ const NotarizeMany = (props) => {
 
   return (
     <div className="row">
-      <div className="six columns">
+      <div>
         <h4>1. Get Steps</h4>
         <p>Here the admin can notarize multiple proofs</p>
-        <div><a href={txMessage} target="_blank">{txMessage}</a></div>
+        <div>
+          <a href={txMessage} target="_blank">
+            {txMessage}
+          </a>
+        </div>
         <form onSubmit={handleSubmit}>
           <div className="row">
-            <div className="six columns">
-              <label for="historyId">History id</label>
-              <input
-                className="u-full-width"
-                type="text"
-                placeholder=""
-                id="historyId"
-              />
-            </div>
+            <input
+              className="input"
+              type="text"
+              placeholder="History id"
+              id="historyId"
+            />
           </div>
           <input
-            className="button-primary"
+            className="button"
             type="submit"
             id="getInfo"
             value="Get Info"
@@ -120,25 +120,34 @@ const NotarizeMany = (props) => {
             <thead>
               <tr>
                 <th>Name</th>
-                <th>^</th>
+                <th>Notarize</th>
               </tr>
             </thead>
             <tbody>
-              {steps.map((step) => (
-                <tr>
+              {steps.map((step, idx) => (
+                <tr key={step._id}>
                   <td>
                     {step.name}
-                    <div style="word-break: break-all">{step.calcHash}</div>
+                    {!step.test_eth_notarization && (
+                      <div style={{ wordBreak: "break-all" }}>
+                        {step.calcHash}
+                      </div>
+                    )}
                   </td>
-                  <td style={{display: step.test_eth_notarization ? "none" : null}}>
-                    <input
-                      className="button-primary"
-                      style="background-color: darkred; border-color: darkred;"
-                      type="button"
-                      id="btnnotarize"
-                      value="GO"
-                      onClick={() => notarizeProof(step.calcHash, step._id)}
-                    />
+                  <td align="center">
+                    {step.test_eth_notarization ? (
+                      <div align="center">Done</div>
+                    ) : (
+                      <input
+                        className="button"
+                        type="button"
+                        id="btnnotarize"
+                        value="GO"
+                        onClick={() =>
+                          notarizeProof(step.calcHash, step._id, idx)
+                        }
+                      />
+                    )}
                   </td>
                 </tr>
               ))}
