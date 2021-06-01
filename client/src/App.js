@@ -14,7 +14,6 @@ const App = (props) => {
   useEffect(() => {
     setWeb3Task();
     console.log("fired");
-    setToken(JSON.parse(localStorage.getItem("userInfo")).token);
   }, []);
 
   const setWeb3Task = async () => {
