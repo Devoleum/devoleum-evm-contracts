@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { keccak } from "hash-wasm";
 
@@ -11,10 +11,6 @@ const Verifier = (props) => {
   const [error, setError] = useState(null);
   let { id = null } = useParams();
   const [itemId, setItemId] = useState(id);
-
-  useEffect(() => {
-    console.log("fired");
-  }, []);
 
   const getDevoleumStep = async () => {
     let step = await getData(`${process.env.API_BASE_URL}/api/steps/${itemId}`);
