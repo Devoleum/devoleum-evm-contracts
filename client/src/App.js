@@ -4,7 +4,7 @@ import GetWeb3 from "./GetWeb3";
 import Verifier from "./Verifier";
 import { GetContract } from "./SmartContract";
 import Header from "./Header";
-import Notarize from "./Notarize";
+import Notarize from "./Notarizer";
 
 const App = (props) => {
   const [web3, setWeb3] = useState(null);
@@ -46,7 +46,7 @@ const App = (props) => {
         <br />
         <Switch>
           <Route path="/notarizer">
-            <Notarize />
+            <Notarize web3={web3} contract={contract} />
           </Route>
           <Route path="/:id?">
             <Verifier web3={web3} contract={contract} />

@@ -22,7 +22,6 @@ const NotarizeMany = (props) => {
     setSteps(steps);
   };
 
-
   const populateStep = async (step) => {
     const jsonContent = await getData(step.uri);
     step.calcHash = await calcHash(
@@ -49,7 +48,7 @@ const NotarizeMany = (props) => {
     return hash;
   };
 
-  const notarizeProof = async (calcHash, stepId) => {
+  const notarizeProof = async (calcHash, stepId, idx) => {
     console.log("get hash: ", calcHash, "get id: ", stepId);
     const accounts = await props.web3.eth.getAccounts();
     await props.contract.methods
@@ -63,10 +62,13 @@ const NotarizeMany = (props) => {
           console.error("emtpy txhash");
           return;
         }
-        const txurl = (`https://rinkeby.etherscan.io/tx/${txhash}`).toString()
+        const txurl = `https://rinkeby.etherscan.io/tx/${txhash}`.toString();
         console.log("get tx hash: ", txurl);
         setTxMessage(txurl);
         await notarizeMongo(txurl, calcHash, stepId);
+        let updatedSteps = [...steps];
+        updatedSteps[idx] = jsonRes;
+        setSteps(updatedSteps);
       });
   };
 
@@ -77,14 +79,18 @@ const NotarizeMany = (props) => {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${JSON.parse(localStorage.getItem('userInfo')).token}`,
+          Authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("userInfo")).token
+          }`,
         },
-        body: JSON.stringify({txurl: txurl, calchash: calchash}),
+        body: JSON.stringify({ txurl: txurl, calchash: calchash }),
       }
     );
-    console.log("get notarizeMongo response: ", response);
+    const jsonRes = await response.json();
+    console.log("get notarizeMongo response: ", jsonRes);
 
-  }
+    return jsonRes;
+  };
 
   return (
     <div className="row">
