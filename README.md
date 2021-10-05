@@ -8,10 +8,11 @@ This repo contains:
  * The smart contract
 
 ## ENV VALUES
-MNEMONIC=""
-INFURA_RINKEBY=""
-ETHERSCAN_API = ""
-API_BASE_URL = ""
+
+    MNEMONIC=""
+    INFURA_RINKEBY=""
+    ETHERSCAN_API = ""
+    API_BASE_URL = ""
 
 ## GETTING STARTED
 
