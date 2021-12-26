@@ -54,6 +54,7 @@ const NotarizeMany = (props) => {
     await props.contract.methods
       .createStepProof(calcHash)
       .send({ from: accounts[0] }, async (error, txhash) => {
+        let txurl = txhash;
         if (error) {
           console.error("error: ", error);
           return;
@@ -62,7 +63,12 @@ const NotarizeMany = (props) => {
           console.error("emtpy txhash");
           return;
         }
-        const txurl = `https://rinkeby.etherscan.io/tx/${txhash}`.toString();
+        if (props.blockchainName === 'Ethereum Rinkeby') {
+          txurl = `https://polygonscan.com/tx/${txhash}`.toString();
+        }
+        if (props.blockchainName === 'Polygon Matic') {
+          txurl = `https://rinkeby.etherscan.io/tx/${txhash}`.toString()
+        }
         console.log("get tx hash: ", txurl);
         setTxMessage(txurl);
         await notarizeMongo(txurl, calcHash, stepId);
@@ -74,14 +80,13 @@ const NotarizeMany = (props) => {
 
   const notarizeMongo = async (txurl, calchash, stepId) => {
     const response = await fetch(
-      `${process.env.API_BASE_URL}/api/steps/rinkeby/${stepId}`,
+      `${process.env.API_BASE_URL}/api/steps/evm/${stepId}`,
       {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("userInfo")).token
-          }`,
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem("userInfo")).token
+            }`,
         },
         body: JSON.stringify({ txurl: txurl, calchash: calchash }),
       }

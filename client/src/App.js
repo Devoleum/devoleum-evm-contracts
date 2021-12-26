@@ -11,9 +11,6 @@ const App = (props) => {
   const [contract, setContract] = useState(null);
   const [blockchainName, setBlockchainName] = useState("Unknown");
   const [token, setToken] = useState(null);
-  {
-    blockchainName;
-  }
 
   useEffect(() => {
     setWeb3Task();
@@ -78,7 +75,7 @@ const App = (props) => {
           <br />
           <Switch>
             <Route path="/notarizer">
-              <Notarize web3={web3} contract={contract} />
+              <Notarize web3={web3} contract={contract} blockchainName={blockchainName}/>
             </Route>
             <Route path="/:id?">
               <Verifier web3={web3} contract={contract} />
