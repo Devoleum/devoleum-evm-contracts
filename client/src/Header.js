@@ -1,6 +1,6 @@
 import React from "react";
 
-const Header = () => (
+const Header = ({blockchainName}) => (
   <div>
     <div>
       <a href="https://devoleum.com/" target="_blank" rel="noopener noreferrer">
@@ -16,7 +16,7 @@ const Header = () => (
       </a>{" "}
       web app that organizes linked open data from physical or digital supply
       chains into authentic stories notarized on various blockchains. Here you
-      can verify the stories showed on our platform notarized on Ethereum.
+      can verify the stories showed on our platform notarized on {blockchainName}.
     </div>
     <br />
     <div>
