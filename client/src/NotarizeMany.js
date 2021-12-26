@@ -5,9 +5,16 @@ const NotarizeMany = (props) => {
   const [steps, setSteps] = useState(null);
   const [stepsCounter, setStepsCounter] = useState(null);
   const [txMessage, setTxMessage] = useState(null);
+  const [blockchainNameAttr, setBlockchainNameAttr] = useState(null);
 
   useEffect(() => {
     console.log("fired");
+    if (blockchainNameAttr === 'Ethereum Rinkeby') {
+      setBlockchainNameAttr('test_eth_notarization')
+    }
+    if (blockchainNameAttr === 'Polygon Matic') {
+      setBlockchainNameAttr('polygon_matic_notarization')
+    }
   }, []);
 
   const handleSubmit = async (e) => {
@@ -78,7 +85,7 @@ const NotarizeMany = (props) => {
       });
   };
 
-  const notarizeMongo = async (txurl, calchash, stepId) => {
+  const notarizeMongo = async (txurl, calchash, stepId, chainName) => {
     const response = await fetch(
       `${process.env.API_BASE_URL}/api/steps/evm/${stepId}`,
       {
@@ -88,7 +95,7 @@ const NotarizeMany = (props) => {
           Authorization: `Bearer ${JSON.parse(localStorage.getItem("userInfo")).token
             }`,
         },
-        body: JSON.stringify({ txurl: txurl, calchash: calchash }),
+        body: JSON.stringify({ txurl: txurl, calchash: calchash, chainName: blockchainName }),
       }
     );
     const jsonRes = await response.json();
@@ -139,14 +146,14 @@ const NotarizeMany = (props) => {
                 <tr key={step._id}>
                   <td>
                     {step.name}
-                    {!step.test_eth_notarization && (
+                    {!step[blockchainNameAttr] && (
                       <div style={{ wordBreak: "break-all" }}>
                         {step.calcHash}
                       </div>
                     )}
                   </td>
                   <td align="center">
-                    {step.test_eth_notarization ? (
+                    {step[blockchainNameAttr] ? (
                       <div align="center">Done</div>
                     ) : (
                       <input
