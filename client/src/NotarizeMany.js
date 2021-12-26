@@ -75,7 +75,7 @@ const NotarizeMany = (props) => {
         }
         console.log("get tx hash: ", txurl);
         setTxMessage(txurl);
-        await notarizeMongo(txurl, calcHash, stepId, blockchainName);
+        const jsonRes = await notarizeMongo(txurl, calcHash, stepId, blockchainName);
         let updatedSteps = [...steps];
         updatedSteps[idx] = jsonRes;
         setSteps(updatedSteps);
