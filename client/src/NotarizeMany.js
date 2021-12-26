@@ -5,16 +5,13 @@ const NotarizeMany = (props) => {
   const [steps, setSteps] = useState(null);
   const [stepsCounter, setStepsCounter] = useState(null);
   const [txMessage, setTxMessage] = useState(null);
-  const [blockchainNameAttr, setBlockchainNameAttr] = useState(null);
+  const [blockchainName, setBlockchainName] = useState(props.blockchainName);
+  const [blockchainNameAttr, setBlockchainNameAttr] = useState(blockchainName === 'Polygon Matic' ? 'polygon_matic_notarization' : 'test_eth_notarization');
 
   useEffect(() => {
+    console.log('bc name: ', blockchainName);
     console.log("fired");
-    if (blockchainNameAttr === 'Ethereum Rinkeby') {
-      setBlockchainNameAttr('test_eth_notarization')
-    }
-    if (blockchainNameAttr === 'Polygon Matic') {
-      setBlockchainNameAttr('polygon_matic_notarization')
-    }
+    console.log('bc attr: ', blockchainNameAttr);
   }, []);
 
   const handleSubmit = async (e) => {
@@ -70,15 +67,15 @@ const NotarizeMany = (props) => {
           console.error("emtpy txhash");
           return;
         }
-        if (props.blockchainName === 'Ethereum Rinkeby') {
+        if (blockchainName === 'Ethereum Rinkeby') {
           txurl = `https://polygonscan.com/tx/${txhash}`.toString();
         }
-        if (props.blockchainName === 'Polygon Matic') {
+        if (blockchainName === 'Polygon Matic') {
           txurl = `https://rinkeby.etherscan.io/tx/${txhash}`.toString()
         }
         console.log("get tx hash: ", txurl);
         setTxMessage(txurl);
-        await notarizeMongo(txurl, calcHash, stepId, props.blockchainName);
+        await notarizeMongo(txurl, calcHash, stepId, blockchainName);
         let updatedSteps = [...steps];
         updatedSteps[idx] = jsonRes;
         setSteps(updatedSteps);
