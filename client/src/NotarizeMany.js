@@ -68,10 +68,10 @@ const NotarizeMany = (props) => {
           return;
         }
         if (blockchainName === 'Ethereum Rinkeby') {
-          txurl = `https://polygonscan.com/tx/${txhash}`.toString();
+          txurl = `https://rinkeby.etherscan.io/tx/${txhash}`.toString()
         }
         if (blockchainName === 'Polygon Matic') {
-          txurl = `https://rinkeby.etherscan.io/tx/${txhash}`.toString()
+          txurl = `https://polygonscan.com/tx/${txhash}`.toString();
         }
         console.log("get tx hash: ", txurl);
         setTxMessage(txurl);
