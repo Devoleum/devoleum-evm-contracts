@@ -12,6 +12,7 @@ const Verifier = (props) => {
   let { id = null } = useParams();
   const [itemId, setItemId] = useState(id);
   const [blockchainName, setBlockchainName] = useState(props.blockchainName);
+  const [blockchainNameAttr, setBlockchainNameAttr] = useState(blockchainName === 'Polygon Matic' ? 'polygon_matic_notarization' : 'test_eth_notarization');
 
   const getDevoleumStep = async () => {
     let step = await getData(`${process.env.API_BASE_URL}/api/steps/${itemId}`);
@@ -116,11 +117,11 @@ const Verifier = (props) => {
             <div>
               <span className="label">{blockchainName} tx: </span>
               <a
-                href={step[blockchainName === 'Polygon Matic' ? 'polygon_matic_notarization' : 'test_eth_notarization']}
+                href={step[blockchainNameAttr]}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {step.test_eth_notarization}
+                {step[blockchainNameAttr]}
               </a>
             </div>
             <div>
