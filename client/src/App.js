@@ -78,7 +78,7 @@ const App = (props) => {
               <Notarize web3={web3} contract={contract} blockchainName={blockchainName}/>
             </Route>
             <Route path="/:id?">
-              <Verifier web3={web3} contract={contract} />
+              <Verifier web3={web3} contract={contract} blockchainName={blockchainName}/>
             </Route>
             <Route>
               <h2 className="title">404 not found</h2>
