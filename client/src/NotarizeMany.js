@@ -78,7 +78,7 @@ const NotarizeMany = (props) => {
         }
         console.log("get tx hash: ", txurl);
         setTxMessage(txurl);
-        await notarizeMongo(txurl, calcHash, stepId);
+        await notarizeMongo(txurl, calcHash, stepId, props.blockchainName);
         let updatedSteps = [...steps];
         updatedSteps[idx] = jsonRes;
         setSteps(updatedSteps);
@@ -95,7 +95,7 @@ const NotarizeMany = (props) => {
           Authorization: `Bearer ${JSON.parse(localStorage.getItem("userInfo")).token
             }`,
         },
-        body: JSON.stringify({ txurl: txurl, calchash: calchash, chainName: blockchainName }),
+        body: JSON.stringify({ txurl: txurl, calchash: calchash, chainName: chainName }),
       }
     );
     const jsonRes = await response.json();
