@@ -1,7 +1,7 @@
 {
-  "name": "hardhat-foundry-template",
+  "name": "muninn-notarizer",
   "version": "1.0.0",
-  "description": "The harmony between Foundry and Hardhat.",
+  "description": "Devoleum EVM notarizer",
   "directories": {
     "lib": "lib",
     "test": "test"
@@ -9,8 +9,8 @@
   "scripts": {
     "test": "hardhat test"
   },
-  "author": "Devan Non <devanon@chainstride.capital>",
-  "license": "Apache-2.0",
+  "author": "Lorenzo Zaccagnini",
+  "license": "AGPL 3.0",
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.6",
     "@nomiclabs/hardhat-waffle": "^2.0.3",
