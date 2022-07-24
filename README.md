@@ -1,53 +1,42 @@
-# devoleum-eth-notarization-muninn
-[![Build Status](https://travis-ci.org/Devoleum/devoleum-eth-notarization-muninn.svg?branch=main)](https://travis-ci.org/Devoleum/devoleum-eth-notarization-muninn)
+# <h1 align="center"> Hardhat x Foundry Template </h1>
 
-This repo contains:
- 
- * Verifier
- * Notarization
- * The smart contract
+**Template repository for getting started quickly with Hardhat and Foundry in one project**
 
-## ENV VALUES
+![Github Actions](https://github.com/devanonon/hardhat-foundry-template/workflows/test/badge.svg)
 
-    MNEMONIC=""
-    INFURA_RINKEBY=""
-    ETHERSCAN_API = ""
-    API_BASE_URL = ""
+### Getting Started
 
-## GETTING STARTED
+ * Use Foundry: 
+```bash
+forge install
+forge test
+```
 
-**Using parcel start the client:**
+ * Use Hardhat:
+```bash
+npm install
+npx hardhat test
+```
 
-    npm start
+### Features
 
-**build**
+ * Write / run tests with either Hardhat or Foundry:
+```bash
+forge test
+# or
+npx hardhat test
+```
 
-    npm run prod-build
+ * Use Hardhat's task framework
+```bash
+npx hardhat example
+```
 
-**Test smart contract**
+ * Install libraries with Foundry which work with Hardhat.
+```bash
+forge install rari-capital/solmate # Already in this repo, just an example
+```
 
-    truffle develop
-    test
+### Notes
 
-## Contributors ✨
-Thanks goes to these wonderful people:
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<table>
-  <tr>
-    <td align="center"><a href="https://it.linkedin.com/in/lorenzo-zaccagnini"><img src="https://avatars2.githubusercontent.com/u/18169376?s=400&u=697698bf9973ab54be5b8eadbf7d1c7c083d23e6&v=4" width="100px;" alt=""/><br /><sub><b>Lorenzo Zaccagnini</b></sub></a><br /><a href="https://it.linkedin.com/in/lorenzo-zaccagnini" title="LinkedIn">💬</a> <a href="https://github.com/LorenzoZaccagnini" title="GitHub">📖</a></td>
-   </tr>
-    <td align="center"><a href=" "><img src="https://avatars1.githubusercontent.com/u/22495052?s=400&u=bfa41aa3de72d097e172add801860178358e9362&v=4" width="100px;" alt=""/><br /><sub><b>Elisa Romondia</b></sub></a><br /><a href="https://fr.linkedin.com/in/elisa-romondia" title="LinkedIn">💬</a> <a href="https://github.com/elisaromondia" title="GitHub">📖</a></td>
-</table>
-<!-- markdownlint-enable -->
-<!-- prettier-ignore-end -->
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
-This project follows the [all-contributors](https://allcontributors.org) specification.
-Contributions of any kind are welcome!
-
-## LICENSE
-
-[mit](LICENSE.md)
+Whenever you install new libraries using Foundry, make sure to update your `remappings.txt` file by running `forge remappings > remappings.txt`. This is required because we use `hardhat-preprocessor` and the `remappings.txt` file to allow Hardhat to resolve libraries you install with Foundry.

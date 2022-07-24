@@ -1,44 +1,31 @@
 {
-  "name": "muninn",
+  "name": "hardhat-foundry-template",
   "version": "1.0.0",
-  "description": "smart contract containing cryptography proofs linked to our mongo db",
-  "main": "main.js",
+  "description": "The harmony between Foundry and Hardhat.",
   "directories": {
+    "lib": "lib",
     "test": "test"
   },
   "scripts": {
-    "test": "truffle test",
-    "clean": "rm client/dist/bundle.js",
-    "start": "cross-env NODE_ENV=development parcel client/index.html --port 3000",
-    "build": "cross-env NODE_ENV=production parcel build client/index.html --no-minify && mv client/_redirects dist"
+    "test": "hardhat test"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Devoleum/devoleum-eth-notarization-muninn.git"
-  },
-  "keywords": [],
-  "author": "Lorenzo Zaccagnini",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Devoleum/devoleum-eth-notarization-muninn/issues"
-  },
-  "homepage": "https://github.com/Devoleum/devoleum-eth-notarization-muninn#readme",
+  "author": "Devan Non <devanon@chainstride.capital>",
+  "license": "Apache-2.0",
   "devDependencies": {
-    "truffle-assertions": "^0.9.2",
-    "truffle-hdwallet-provider": "^1.0.17",
-    "truffle-plugin-verify": "^0.5.4",
-    "cross-env": "^5.1.1"
-  },
-  "dependencies": {
-    "@babel/core": "^7.12.10",
-    "@babel/preset-env": "^7.12.11",
-    "@openzeppelin/contracts": "^2.5.1",
-    "dotenv": "^8.2.0",
-    "hash-wasm": "^4.4.1",
-    "parcel-bundler": "^1.12.4",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-router-dom": "^5.2.0",
-    "web3": "^1.3.1"
+    "@nomiclabs/hardhat-ethers": "^2.0.6",
+    "@nomiclabs/hardhat-waffle": "^2.0.3",
+    "@typechain/ethers-v5": "^10.0.0",
+    "@typechain/hardhat": "^6.0.0",
+    "@types/chai": "^4.3.0",
+    "@types/mocha": "^9.1.0",
+    "@types/node": "^17.0.35",
+    "chai": "^4.3.6",
+    "ethereum-waffle": "^3.2.0",
+    "ethers": "^5.6.6",
+    "hardhat": "^2.9.5",
+    "hardhat-preprocessor": "^0.1.4",
+    "ts-node": "^10.7.0",
+    "typechain": "^8.0.0",
+    "typescript": "^4.6.4"
   }
 }
