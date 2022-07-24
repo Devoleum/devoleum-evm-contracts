@@ -79,6 +79,6 @@ describe("Devoleum", function () {
         .createStepProof(
           "3bea53f3f773a4fxxxx85405cbd8537ed9cfceba61ac21ce6480011cba0ea"
         )
-    ).to.be.revertedWith("Only owner can call this function");
+    ).to.be.revertedWith("Ownable: caller is not the owner");
   });
 });
