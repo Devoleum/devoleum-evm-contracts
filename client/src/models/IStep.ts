@@ -1,4 +1,3 @@
-
 export interface IStep {
   public: boolean;
   featured: boolean;
@@ -9,26 +8,19 @@ export interface IStep {
   test_algo_notarization: string;
   bitcoin_notarization: string;
   ipfs_notarization: string;
-  _id: Id;
-  user: User;
+  _id: Oid;
+  user: Oid;
   name: string;
   uri: string;
   randomizeProof: string;
-  historyId: HistoryId;
+  historyId: Oid;
   createdAt: Date;
   updatedAt: Date;
   __v: number;
   hash: string;
+  calcHash?: string;
 }
 
-export interface Id {
-  $oid: string;
-}
-
-export interface User {
-  $oid: string;
-}
-
-export interface HistoryId {
+export interface Oid {
   $oid: string;
 }

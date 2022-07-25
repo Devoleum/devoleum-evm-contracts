@@ -1,22 +1,21 @@
 /** @jsxImportSource solid-js */
-import { keccak } from "hash-wasm";
 import { useParams } from "solid-app-router";
 import { Component, createSignal } from "solid-js";
+
 import { IStep } from "../models/IStep";
+import { calcHash, getData } from "../utils/api";
+import { IPageProps } from "../models/IPage";
 
-interface IProps {
-  blockchainName: string;
-}
+const Verifier: Component<IPageProps> = (props: IPageProps) => {
+  let { id = "5ffb9399b44b660004ba402c" } = useParams();
+  console.log("id; ", id);
 
-const Verifier: Component<IProps> = (props: IProps) => {
-  let { id = "" } = useParams();
-  console.log(id);
-
-  const [step, setStep] = createSignal<IStep>();
+  const [step, setStep] = createSignal<IStep>({} as IStep);
   const [hash, setHash] = createSignal<string>("");
   const [proof, setProof] = createSignal(null);
   const [error, setError] = createSignal("");
   const [itemId, setItemId] = createSignal<string>(id);
+
   const blockchainNameAttr =
     props.blockchainName === "Polygon Matic"
       ? "polygon_matic_notarization"
@@ -24,49 +23,18 @@ const Verifier: Component<IProps> = (props: IProps) => {
 
   const getDevoleumStep = async () => {
     let step: IStep = await getData(
-      `${process.env.VITE_API_BASE_URL}/api/steps/${itemId()}`
+      `${import.meta.env.VITE_API_BASE_URL}/api/steps/${itemId()}`
     );
     const jsonContent = await getData(step.uri);
+
     setHash(await calcHash(JSON.stringify(jsonContent), step.randomizeProof));
     setStep(step);
-    await getProof(hash);
+    await getProof();
   };
-  const getProof = async (hashJson) => {
-    const arrayId = await props.contract.methods.hashToId(hashJson).call();
-
-    const blockchainStep = await props.contract.methods
-      .stepIdToStepInfo(arrayId)
-      .call();
-
-    console.log(blockchainStep);
+  const getProof = async () => {
+    const arrayId = await props.contract.hashToId(hash());
+    const blockchainStep = await props.contract.stepIdToStepInfo(arrayId);
     await setProof(blockchainStep[1]);
-  };
-
-  const outcomeComparison = (success: boolean) => {
-    success ? (
-      <div style={{ color: "green" }}>Success, exact match!</div>
-    ) : (
-      <div style={{ color: "red" }}>Epic fail, are not the same!</div>
-    );
-  };
-
-  const getData = async (url: string) => {
-    try {
-      const res = await fetch(url);
-      const result = await res.json();
-      console.log("fetch get: ", result);
-      return result;
-    } catch (error) {
-      if (error) {
-        console.log("error is here: ", error);
-      }
-    }
-    return;
-  };
-
-  const calcHash = async (content: string, random: string) => {
-    const hash = await keccak(content + random, 256);
-    return hash;
   };
 
   return (
@@ -90,7 +58,7 @@ const Verifier: Component<IProps> = (props: IProps) => {
       <span>{error}</span>
       <br />
       <br />
-      {proof() && step() &&(
+      {proof() && step() && (
         <div>
           <div class="tab-with-corner">
             Devoleum Step{" - "}
@@ -100,46 +68,46 @@ const Verifier: Component<IProps> = (props: IProps) => {
               <span style={{ color: "red" }}>Not Matching</span>
             )}
           </div>
-            <div class="boxed">
-              <div>
-                <span class="label">Step ID: </span>
-                {step.id}
-              </div>
-              <div>
-                <span class="label">Step name: </span>
-                <a
-                  href={"https://app.devoleum.com/step/" + step._id}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {step.name}
-                </a>
-              </div>
-              <div>
-                <span class="label">JSON hash: </span>
-                {hash}
-              </div>
-              <div>
-                <span class="label">{props.blockchainName} hash: </span>
-                {proof}
-              </div>
-              <div>
-                <span class="label">{props.blockchainName} tx: </span>
-                <a
-                  href={step[blockchainNameAttr]}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {step[blockchainNameAttr]}
-                </a>
-              </div>
-              <div>
-                <span class="label">JSON link: </span>
-                <a href={step.uri} target="_blank" rel="noopener noreferrer">
-                  {step.uri}
-                </a>
-              </div>
+          <div class="boxed">
+            <div>
+              <span class="label">Step ID: </span>
+              {itemId()}
             </div>
+            <div>
+              <span class="label">Step name: </span>
+              <a
+                href={"https://app.devoleum.com/step/" + step()._id}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {step().name}
+              </a>
+            </div>
+            <div>
+              <span class="label">JSON hash: </span>
+              {hash}
+            </div>
+            <div>
+              <span class="label">{props.blockchainName} hash: </span>
+              {proof}
+            </div>
+            <div>
+              <span class="label">{props.blockchainName} tx: </span>
+              <a
+                href={step[blockchainNameAttr]}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {step[blockchainNameAttr]}
+              </a>
+            </div>
+            <div>
+              <span class="label">JSON link: </span>
+              <a href={step().uri} target="_blank" rel="noopener noreferrer">
+                {step().uri}
+              </a>
+            </div>
+          </div>
         </div>
       )}
     </div>

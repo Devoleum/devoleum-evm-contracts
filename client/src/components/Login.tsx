@@ -1,7 +1,7 @@
-
 /** @jsxImportSource solid-js */
-const Login = (props) => {
+import { Component } from "solid-js";
 
+const Login: Component = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const { username, password } = e.target.elements;
@@ -19,12 +19,15 @@ const Login = (props) => {
       }
     );
     let data = await response.json();
-    console.log(data)
+    console.log(data);
     localStorage.setItem("userInfo", JSON.stringify(data));
   };
 
-  if (JSON.parse(localStorage.getItem("userInfo") || "") && JSON.parse(localStorage.getItem("userInfo") || "").isAdmin) return (null)
-
+  if (
+    JSON.parse(localStorage.getItem("userInfo") || "") &&
+    JSON.parse(localStorage.getItem("userInfo") || "").isAdmin
+  )
+    return null;
 
   return (
     <div class="row">
@@ -32,22 +35,12 @@ const Login = (props) => {
         <h4>Login</h4>
         <form onSubmit={handleSubmit}>
           <div class="row">
-              <label html-for="username">Username</label>
-              <input
-                class="input"
-                type="text"
-                placeholder=""
-                id="username"
-              />
+            <label html-for="username">Username</label>
+            <input class="input" type="text" placeholder="" id="username" />
           </div>
           <div class="row">
-              <label html-for="password">Password</label>
-              <input
-                class="input"
-                type="password"
-                placeholder=""
-                id="password"
-              />
+            <label html-for="password">Password</label>
+            <input class="input" type="password" placeholder="" id="password" />
           </div>
           <input class="button" type="submit" id="login" value="Login" />
         </form>
