@@ -1,11 +1,72 @@
 /** @jsxImportSource solid-js */
-import type { Component } from 'solid-js';
+import { Link, Route, Router, Routes } from "solid-app-router";
+import { Component, createSignal, lazy, onMount } from "solid-js";
+import { Header } from "./components/Header";
+import { ethers } from "ethers";
+import "./styles/index.css";
+import DevoleumArtifact from "../../artifacts/src/Devoleum.sol/Devoleum.json";
+const Login = lazy(() => import("./pages/Login"));
+const Verifier = lazy(() => import("./pages/Verifier"));
+console.log(import.meta.env.VITE_API_BASE_URL);
 
 const App: Component = () => {
+  const blockchainName = "Polygon Matic";
+  const [contract, setContract] = createSignal<ethers.Contract>();
+  onMount(async () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    await provider.send("eth_requestAccounts", []);
+    const signer = provider.getSigner();
+    setContract(
+      new ethers.Contract(
+        "0x64169a158089f879048738e944c5c930548c620f",
+        DevoleumArtifact.abi,
+        provider
+      )
+    );
+    if (contract()) {
+      console.log(contract().address);
+      console.log(await contract().stepIdToStepInfo(1));
+    }
+  });
+
+  // There is only ever up to one account in MetaMask exposed
   return (
-    <>
-      <h1>Hello world!!!!</h1>
-    </>
+    <Router>
+      <div class="container App">
+        <h1 class="title">Devoleum - {blockchainName} Verifier</h1>
+        {blockchainName === "Polygon Matic" ||
+        blockchainName === "Ethereum Rinkeby" ? (
+          <>
+            <nav>
+              <Link href="/login">Login</Link>
+              <Link href="/">Verifier</Link>
+            </nav>
+            <Header blockchainName={blockchainName} />
+            <div>
+              In order to make it work you need to have the{" "}
+              <a
+                href="https://metamask.io/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Metamask browser extension.
+              </a>
+            </div>
+            <br />
+            <Routes>
+              <Route path="/login" component={Login} />
+              <Route path="/:id?" component={Verifier} />
+            </Routes>
+          </>
+        ) : (
+          <div>
+            {" "}
+            Please change Metamask network to Polygon Matic or Rinkeby and
+            refresh the page
+          </div>
+        )}
+      </div>
+    </Router>
   );
 };
 

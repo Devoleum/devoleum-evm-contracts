@@ -6,7 +6,7 @@ const Login = (props) => {
     e.preventDefault();
     const { username, password } = e.target.elements;
     const response = await fetch(
-      `${process.env.API_BASE_URL}/api/users/login`,
+      `${process.env.VITE_API_BASE_URL}/api/users/login`,
       {
         method: "POST",
         headers: {

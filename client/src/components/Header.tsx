@@ -1,6 +1,11 @@
 /** @jsxImportSource solid-js */
-const Header = ( blockchainName: string ) => (
-  <div>
+import { Component } from "solid-js"
+
+interface IHeader {
+  blockchainName: string,
+}
+
+export const Header: Component<IHeader> = (props: IHeader) => <div>
     <div>
       <a href="https://devoleum.com/" target="_blank" rel="noopener noreferrer">
         Devoleum
@@ -15,7 +20,7 @@ const Header = ( blockchainName: string ) => (
       </a>{" "}
       web app that organizes linked open data from physical or digital supply
       chains into authentic stories notarized on various blockchains. Here you
-      can verify the stories showed on our platform notarized on Polygon and Rinkeby, now you are on {blockchainName}.
+      can verify the stories showed on our platform notarized on Polygon and Rinkeby, now you are on {props.blockchainName}.
       If you want to use another network please switch network on Metamask.
     </div>
     <br />
@@ -28,6 +33,4 @@ const Header = ( blockchainName: string ) => (
     </div>
     <br />
   </div>
-);
 
-export default Header;

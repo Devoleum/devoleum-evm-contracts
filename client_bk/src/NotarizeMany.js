@@ -18,7 +18,7 @@ const NotarizeMany = (props) => {
     e.preventDefault();
     const { historyId } = e.target.elements;
     let steps = await getData(
-      `${process.env.API_BASE_URL}/api/steps/history/${historyId.value}/steps`
+      `${process.env.VITE_API_BASE_URL}/api/steps/history/${historyId.value}/steps`
     );
     for (let step of steps) {
       await populateStep(step);
@@ -84,7 +84,7 @@ const NotarizeMany = (props) => {
 
   const notarizeMongo = async (txurl, calchash, stepId, chainName) => {
     const response = await fetch(
-      `${process.env.API_BASE_URL}/api/steps/evm/${stepId}`,
+      `${process.env.VITE_API_BASE_URL}/api/steps/evm/${stepId}`,
       {
         method: "PUT",
         headers: {

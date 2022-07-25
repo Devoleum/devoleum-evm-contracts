@@ -15,7 +15,7 @@ const Verifier = (props) => {
   const [blockchainNameAttr, setBlockchainNameAttr] = useState(blockchainName === 'Polygon Matic' ? 'polygon_matic_notarization' : 'test_eth_notarization');
 
   const getDevoleumStep = async () => {
-    let step = await getData(`${process.env.API_BASE_URL}/api/steps/${itemId}`);
+    let step = await getData(`${process.env.VITE_API_BASE_URL}/api/steps/${itemId}`);
     const jsonContent = await getData(step.uri);
     step.calcHash = await calcHash(
       JSON.stringify(jsonContent),
