@@ -7,7 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "hardhat test"
+    "test": "hardhat test",
+    "dev": "vite"
   },
   "author": "Lorenzo Zaccagnini",
   "license": "AGPL 3.0",
@@ -26,6 +27,15 @@
     "hardhat-preprocessor": "^0.1.4",
     "ts-node": "^10.7.0",
     "typechain": "^8.0.0",
-    "typescript": "^4.6.4"
+    "typescript": "^4.6.4",
+    "@testing-library/jest-dom": "^5.16.4",
+    "jsdom": "^20.0.0",
+    "solid-testing-library": "^0.3.0",
+    "vite": "^3.0.0",
+    "vite-plugin-solid": "^2.3.0",
+    "vitest": "^0.18.0"
+  },
+  "dependencies": {
+    "solid-js": "^1.4.8"
   }
 }
