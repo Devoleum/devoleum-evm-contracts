@@ -8,7 +8,9 @@
   },
   "scripts": {
     "test": "hardhat test",
-    "dev": "vite"
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
   },
   "author": "Lorenzo Zaccagnini",
   "license": "AGPL 3.0",
