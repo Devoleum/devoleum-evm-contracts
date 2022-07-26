@@ -5,10 +5,10 @@ out/
 
 # JS
 node_modules/
-*.env
+client/.env
 #Hardhat files
 cache_hardhat/
-artifacts/
+#artifacts/
 
 #Hardhat plugin files
 typechain-types/
