@@ -1,0 +1,17 @@
+INFO:Slither:Compilation warnings/errors on /data/Devoleum.sol:
+[91mError: Source "@openzeppelin/contracts/access/Ownable.sol" not found: File not found.[0m
+ --> /data/Devoleum.sol:4:1:
+  |
+4 | import "@openzeppelin/contracts/access/Ownable.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[91mError: Source "@openzeppelin/contracts/utils/math/SafeMath.sol" not found: File not found.[0m
+ --> /data/Devoleum.sol:5:1:
+  |
+5 | import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+INFO:SlitherSolcParsing:No contract were found in /data/Devoleum.sol, check the correct compilation
+WARNING:Slither:[91mNo contract was analyzed[0m
+INFO:Slither:/data/Devoleum.sol analyzed (0 contracts), 0 result(s) found

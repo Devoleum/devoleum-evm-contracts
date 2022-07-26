@@ -1,0 +1,17 @@
+Arguments passed: ['smartBugs.py', '--tool', 'oyente', 'slither', 'smartcheck', 'solhint', '--file', '/home/runner/work/devoleum-eth-notarization-muninn/devoleum-eth-notarization-muninn/src/Devoleum.sol']
+Pulling image qspprotocol/oyente-0.4.25, this may take a while ...
+Image qspprotocol/oyente-0.4.25 pulled
+Pulling image trailofbits/slither, this may take a while ...
+Image trailofbits/slither pulled
+Pulling image smartbugs/smartcheck, this may take a while ...
+Image smartbugs/smartcheck pulled
+Pulling image smartbugs/solhint, this may take a while ...
+Image smartbugs/solhint pulled
+[1/4] /home/runner/work/devoleum-eth-notarization-muninn/devoleum-eth-notarization-muninn/src/Devoleum.sol [slither] in 0:00:02
+[2/4] /home/runner/work/devoleum-eth-notarization-muninn/devoleum-eth-notarization-muninn/src/Devoleum.sol [solhint] in 0:00:01
+Solc experienced a fatal error. Check the results file for more info
+oyente, /home/runner/work/devoleum-eth-notarization-muninn/devoleum-eth-notarization-muninn/src/Devoleum.sol
+[3/4] /home/runner/work/devoleum-eth-notarization-muninn/devoleum-eth-notarization-muninn/src/Devoleum.sol [oyente] in 0:00:01
+[4/4] /home/runner/work/devoleum-eth-notarization-muninn/devoleum-eth-notarization-muninn/src/Devoleum.sol [smartcheck] in 0:00:02
+Analysis completed. 
+It took 0:01:17 to analyse all files.
