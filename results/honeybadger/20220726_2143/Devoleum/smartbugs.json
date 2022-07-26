@@ -1,0 +1,8 @@
+{
+  "contract": "/home/runner/work/devoleum-eth-notarization-muninn/devoleum-eth-notarization-muninn/src/Devoleum.sol",
+  "tool": "honeybadger",
+  "start": 1658872106.3448653,
+  "end": 1658872107.8268914,
+  "duration": 1.4820261001586914,
+  "exit_code": 0
+}

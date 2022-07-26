@@ -1,0 +1,13 @@
+{
+  "analysis": {
+    "error": "Solc experienced a fatal error (code 1).\n\nError: Source \"@openzeppelin/contracts/access/Ownable.sol\" not found: File not found.\n --> /data/Devoleum.sol:4:1:\n  |\n4 | import \"@openzeppelin/contracts/access/Ownable.sol\";\n  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\nError: Source \"@openzeppelin/contracts/utils/math/SafeMath.sol\" not found: File not found.\n --> /data/Devoleum.sol:5:1:\n  |\n5 | import \"@openzeppelin/contracts/utils/math/SafeMath.sol\";\n  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n",
+    "issues": [],
+    "success": false
+  },
+  "contract": "/home/runner/work/devoleum-eth-notarization-muninn/devoleum-eth-notarization-muninn/src/Devoleum.sol",
+  "duration": 1.2421088218688965,
+  "end": 1658872109.0705466,
+  "exit_code": 0,
+  "start": 1658872107.8284378,
+  "tool": "mythril"
+}
