@@ -18,7 +18,9 @@ const NotarizeMany: Component<IPageProps> = (props: IPageProps) => {
     e.preventDefault();
     const { historyId } = e.target.elements;
     let steps = await getData(
-      `${process.env.VITE_API_BASE_URL}/api/steps/history/${historyId.value}/steps`
+      `${import.meta.env.VITE_API_BASE_URL}/api/steps/history/${
+        historyId.value
+      }/steps`
     );
     for (let step of steps) {
       await populateStep(step);
@@ -71,7 +73,7 @@ const NotarizeMany: Component<IPageProps> = (props: IPageProps) => {
     chainName: string
   ) => {
     const response = await fetch(
-      `${process.env.VITE_API_BASE_URL}/api/steps/evm/${stepId}`,
+      `${import.meta.env.VITE_API_BASE_URL}/api/steps/evm/${stepId}`,
       {
         method: "PUT",
         headers: {
@@ -138,7 +140,7 @@ const NotarizeMany: Component<IPageProps> = (props: IPageProps) => {
                 <tbody>
                   <For each={steps()} fallback={<div>Loading...</div>}>
                     {(step, idx) => (
-                      <tr key={step._id}>
+                      <tr>
                         <td>
                           {step.name}
                           {!step[blockchainNameAttr] && (
@@ -147,9 +149,9 @@ const NotarizeMany: Component<IPageProps> = (props: IPageProps) => {
                             </div>
                           )}
                         </td>
-                        <td align="center">
+                        <td>
                           {step[blockchainNameAttr] ? (
-                            <div align="center">Done</div>
+                            <div>Done</div>
                           ) : (
                             <input
                               class="button"

@@ -1,5 +1,12 @@
 /** @jsxImportSource solid-js */
-import { Link, Route, Router, Routes } from "solid-app-router";
+import {
+  Link,
+  Route,
+  RouteDefinition,
+  Router,
+  Routes,
+  useRoutes,
+} from "solid-app-router";
 import { Component, createSignal, lazy, onMount } from "solid-js";
 import { Header } from "./components/Header";
 import { ethers } from "ethers";
@@ -15,6 +22,21 @@ const App: Component = () => {
   const [contract, setContract] = createSignal<ethers.Contract>(
     {} as ethers.Contract
   );
+  const routes: RouteDefinition[] = [
+    {
+      path: "/",
+      component: (
+        <Verifier contract={contract()} blockchainName={blockchainName()} />
+      ) as Component,
+    },
+    {
+      path: "/notarizer",
+      component: (
+        <NotarizeMany contract={contract()} blockchainName={blockchainName()} />
+      ) as Component,
+    },
+  ];
+  const Routes = useRoutes(routes);
   onMount(async () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     await provider.send("eth_requestAccounts", []);
@@ -54,7 +76,7 @@ const App: Component = () => {
     <Router>
       <div class="container App">
         <h1 class="title">Devoleum - {blockchainName()} Verifier</h1>
-        {true ? (
+        {window.ethereum ? (
           <>
             <nav>
               <Link href="/">Verifier</Link> |{" "}
@@ -72,30 +94,7 @@ const App: Component = () => {
               </a>
             </div>
             <br />
-            <Routes>
-              <Route
-                path="/notarizer"
-                component={
-                  (
-                    <NotarizeMany
-                      contract={contract()}
-                      blockchainName={blockchainName()}
-                    />
-                  ) as Component
-                }
-              />
-              <Route
-                path="/:id?"
-                component={
-                  (
-                    <Verifier
-                      contract={contract()}
-                      blockchainName={blockchainName()}
-                    />
-                  ) as Component
-                }
-              />
-            </Routes>
+            <Routes />
           </>
         ) : (
           <div>

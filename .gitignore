@@ -5,7 +5,7 @@ out/
 
 # JS
 node_modules/
-
+.env
 #Hardhat files
 cache_hardhat/
 artifacts/

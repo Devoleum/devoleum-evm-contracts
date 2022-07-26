@@ -6,7 +6,7 @@ const Login: Component = () => {
     e.preventDefault();
     const { username, password } = e.target.elements;
     const response = await fetch(
-      `${process.env.VITE_API_BASE_URL}/api/users/login`,
+      `${import.meta.env.VITE_API_BASE_URL}/api/users/login`,
       {
         method: "POST",
         headers: {
@@ -23,11 +23,11 @@ const Login: Component = () => {
     localStorage.setItem("userInfo", JSON.stringify(data));
   };
 
-  if (
+  /*   if (
     JSON.parse(localStorage.getItem("userInfo") || "") &&
     JSON.parse(localStorage.getItem("userInfo") || "").isAdmin
   )
-    return null;
+    return null; */
 
   return (
     <div class="row">
