@@ -12,4 +12,4 @@ cache_hardhat/
 #artifacts/
 
 #Hardhat plugin files
-typechain-types/
+#typechain-types/

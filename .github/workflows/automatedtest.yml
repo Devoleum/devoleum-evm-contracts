@@ -44,9 +44,6 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Run hardhat build
-        run: npx hardhat build
-
       - name: Run hardhat Test
         run: npx hardhat test
 
