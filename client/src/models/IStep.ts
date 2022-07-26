@@ -24,3 +24,5 @@ export interface IStep {
 export interface Oid {
   $oid: string;
 }
+
+export type BlockchainName = "Polygon Matic" | "Ethereum Rinkeby" | "Unknown";

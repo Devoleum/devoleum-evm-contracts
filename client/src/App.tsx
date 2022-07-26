@@ -7,12 +7,13 @@ import {
   Routes,
   useRoutes,
 } from "solid-app-router";
-import { Component, createSignal, lazy, onMount } from "solid-js";
+import { Component, createEffect, createSignal, lazy, onMount } from "solid-js";
 import { Header } from "./components/Header";
 import { ethers } from "ethers";
 import "./styles/index.css";
 import "./styles/responsive.css";
 import DevoleumArtifact from "../../artifacts/src/Devoleum.sol/Devoleum.json";
+import { BlockchainProvider, useBlockhain } from "./components/BlockchainCtx";
 import Verifier from "./pages/Verifier";
 import NotarizeMany from "./pages/NotarizeMany";
 console.log(import.meta.env.VITE_API_BASE_URL);
@@ -22,17 +23,18 @@ const App: Component = () => {
   const [contract, setContract] = createSignal<ethers.Contract>(
     {} as ethers.Contract
   );
+
   const routes: RouteDefinition[] = [
     {
-      path: "/",
+      path: "/:id?",
       component: (
-        <Verifier contract={contract()} blockchainName={blockchainName()} />
+        <Verifier blockchainName={blockchainName()} contract={contract()} />
       ) as Component,
     },
     {
       path: "/notarizer",
       component: (
-        <NotarizeMany contract={contract()} blockchainName={blockchainName()} />
+        <NotarizeMany blockchainName={blockchainName()} contract={contract()} />
       ) as Component,
     },
   ];
@@ -43,13 +45,15 @@ const App: Component = () => {
     const { chainId } = await provider.getNetwork();
     chainIdSwitch(chainId);
     const signer = provider.getSigner();
-    setContract(
-      new ethers.Contract(
-        "0x64169a158089f879048738e944c5c930548c620f",
-        DevoleumArtifact.abi,
-        provider
-      )
+    const contractTemp = new ethers.Contract(
+      blockchainName() === "Polygon Matic"
+        ? "0x2ac0ccfbdcff7d1dd88f5b6fa7b0354adfbe4378"
+        : "0x64169a158089f879048738e944c5c930548c620f",
+      DevoleumArtifact.abi,
+      provider
     );
+
+    setContract(contractTemp);
   });
 
   const chainIdSwitch = (chainId: number) => {
@@ -67,13 +71,16 @@ const App: Component = () => {
         break;
       default:
         console.log("This is an unknown network. id: ", chainId);
-        setBlockchainName("Unkown");
+        setBlockchainName("Unknown");
     }
   };
 
   // There is only ever up to one account in MetaMask exposed
   return (
-    <Router>
+    <BlockchainProvider
+      blockchainName={"Unknown"}
+      contract={{} as ethers.Contract}
+    >
       <div class="container App">
         <h1 class="title">Devoleum - {blockchainName()} Verifier</h1>
         {window.ethereum ? (
@@ -104,7 +111,7 @@ const App: Component = () => {
           </div>
         )}
       </div>
-    </Router>
+    </BlockchainProvider>
   );
 };
 

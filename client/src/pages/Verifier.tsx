@@ -1,12 +1,11 @@
 /** @jsxImportSource solid-js */
 import { useParams } from "solid-app-router";
 import { Component, createSignal } from "solid-js";
-
 import { IStep } from "../models/IStep";
 import { calcHash, getData } from "../utils/api";
 import { IPageProps } from "../models/IPage";
 
-const Verifier: Component<IPageProps> = (props: IPageProps) => {
+const Verifier: Component<IPageProps> = (props) => {
   let { id = "5ffb9399b44b660004ba402c" } = useParams();
   console.log("id; ", id);
 
@@ -94,11 +93,11 @@ const Verifier: Component<IPageProps> = (props: IPageProps) => {
             <div>
               <span class="label">{props.blockchainName} tx: </span>
               <a
-                href={step[blockchainNameAttr]}
+                href={step()[blockchainNameAttr]}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {step[blockchainNameAttr]}
+                {step()[blockchainNameAttr]}
               </a>
             </div>
             <div>

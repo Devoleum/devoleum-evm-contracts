@@ -23,11 +23,11 @@ const Login: Component = () => {
     localStorage.setItem("userInfo", JSON.stringify(data));
   };
 
-  /*   if (
+  if (
     JSON.parse(localStorage.getItem("userInfo") || "") &&
     JSON.parse(localStorage.getItem("userInfo") || "").isAdmin
   )
-    return null; */
+    return null;
 
   return (
     <div class="row">

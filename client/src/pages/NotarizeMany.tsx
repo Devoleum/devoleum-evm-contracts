@@ -2,10 +2,11 @@
 import { Component, createSignal, For } from "solid-js";
 import { IStep } from "../models/IStep";
 import { calcHash, getData } from "../utils/api";
-import { IPageProps } from "../models/IPage";
 import Login from "../components/Login";
+import { useBlockhain } from "../components/BlockchainCtx";
+import { IPageProps } from "../models/IPage";
 
-const NotarizeMany: Component<IPageProps> = (props: IPageProps) => {
+const NotarizeMany: Component<IPageProps> = (props) => {
   const [steps, setSteps] = createSignal<IStep[]>([] as IStep[]);
   const [stepsCounter, setStepsCounter] = createSignal(0);
   const [txMessage, setTxMessage] = createSignal("");
@@ -36,7 +37,11 @@ const NotarizeMany: Component<IPageProps> = (props: IPageProps) => {
     );
   };
 
-  const notarizeProof = async (calcHash, stepId, idx) => {
+  const notarizeProof = async (
+    calcHash: string,
+    stepId: string,
+    idx: number
+  ) => {
     console.log("get hash: ", calcHash, "get id: ", stepId);
     const tx = await props.contract.createStepProof(calcHash);
 
@@ -129,7 +134,7 @@ const NotarizeMany: Component<IPageProps> = (props: IPageProps) => {
           </div>
           {steps && (
             <div class="twelve columns" id="stepContainer">
-              <h4>2. Notarize {stepsCounter}</h4>
+              <h4>2. Notarize</h4>
               <table class="u-full-width" id="stepTable">
                 <thead>
                   <tr>
@@ -159,7 +164,11 @@ const NotarizeMany: Component<IPageProps> = (props: IPageProps) => {
                               id="btnnotarize"
                               value="GO"
                               onClick={() =>
-                                notarizeProof(step.calcHash, step._id, idx)
+                                notarizeProof(
+                                  step.calcHash ? step.calcHash : "",
+                                  step._id.$oid,
+                                  idx()
+                                )
                               }
                             />
                           )}
