@@ -1,0 +1,339 @@
+2022-07-26 21:43:23,482: [16] m.main:INFO: Registered plugins: DetectExternalCallAndLeak, DetectReentrancyAdvanced, DetectSuicidal, DetectReentrancySimple, DetectInvalid, DetectUnusedRetVal, DetectDelegatecall, DetectUninitializedStorage, DetectEnvInstruction, DetectIntegerOverflow, DetectUninitializedMemory
+2022-07-26 21:43:23,482: [16] m.main:INFO: Beginning analysis
+2022-07-26 21:43:23,489: [16] m.e.manticore:INFO: Starting symbolic create contract
+2022-07-26 21:43:23,501: [16] m.e.manticore:ERROR: Errors : Invalid solc compilation Error: Source "@openzeppelin/contracts/access/Ownable.sol" not found: File not found.
+ --> data/Devoleum.sol:4:1:
+  |
+4 | import "@openzeppelin/contracts/access/Ownable.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Error: Source "@openzeppelin/contracts/utils/math/SafeMath.sol" not found: File not found.
+ --> data/Devoleum.sol:5:1:
+  |
+5 | import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+. Solidity failed to generate bytecode for your contract. Check if all the abstract functions are implemented. 
+2022-07-26 21:43:23,560: [59] m.c.manticore:INFO: Generated testcase No. 0 - NO STATE RESULT (?)(0 txs)
+2022-07-26 21:43:23,677: [16] m.c.manticore:INFO: Results in /mcore_x06dv98n
+2022-07-26 21:43:24,082: [317] m.main:INFO: Registered plugins: DetectEnvInstruction, DetectUninitializedStorage, DetectSuicidal, DetectExternalCallAndLeak, DetectUnusedRetVal, DetectUninitializedMemory, DetectReentrancyAdvanced, DetectDelegatecall, DetectIntegerOverflow, DetectReentrancySimple, DetectInvalid
+2022-07-26 21:43:24,083: [317] m.main:INFO: Beginning analysis
+2022-07-26 21:43:24,090: [317] m.e.manticore:INFO: Starting symbolic create contract
+2022-07-26 21:43:24,102: [317] m.e.manticore:ERROR: Errors : Invalid solc compilation Error: Source "@openzeppelin/contracts/access/Ownable.sol" not found: File not found.
+ --> data/Devoleum.sol:4:1:
+  |
+4 | import "@openzeppelin/contracts/access/Ownable.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Error: Source "@openzeppelin/contracts/utils/math/SafeMath.sol" not found: File not found.
+ --> data/Devoleum.sol:5:1:
+  |
+5 | import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+. Solidity failed to generate bytecode for your contract. Check if all the abstract functions are implemented. 
+2022-07-26 21:43:24,158: [359] m.c.manticore:INFO: Generated testcase No. 0 - NO STATE RESULT (?)(0 txs)
+2022-07-26 21:43:24,276: [317] m.c.manticore:INFO: Results in /mcore_strz23c4
+2022-07-26 21:43:24,680: [618] m.main:INFO: Registered plugins: DetectReentrancySimple, DetectInvalid, DetectUnusedRetVal, DetectSuicidal, DetectUninitializedStorage, DetectEnvInstruction, DetectReentrancyAdvanced, DetectDelegatecall, DetectUninitializedMemory, DetectIntegerOverflow, DetectExternalCallAndLeak
+2022-07-26 21:43:24,680: [618] m.main:INFO: Beginning analysis
+2022-07-26 21:43:24,687: [618] m.e.manticore:INFO: Starting symbolic create contract
+2022-07-26 21:43:24,699: [618] m.e.manticore:ERROR: Errors : Invalid solc compilation Error: Source "@openzeppelin/contracts/access/Ownable.sol" not found: File not found.
+ --> data/Devoleum.sol:4:1:
+  |
+4 | import "@openzeppelin/contracts/access/Ownable.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Error: Source "@openzeppelin/contracts/utils/math/SafeMath.sol" not found: File not found.
+ --> data/Devoleum.sol:5:1:
+  |
+5 | import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+. Solidity failed to generate bytecode for your contract. Check if all the abstract functions are implemented. 
+2022-07-26 21:43:24,757: [663] m.c.manticore:INFO: Generated testcase No. 0 - NO STATE RESULT (?)(0 txs)
+2022-07-26 21:43:24,860: [618] m.c.manticore:INFO: Results in /mcore_ud_wpcec
+2022-07-26 21:43:25,265: [919] m.main:INFO: Registered plugins: DetectReentrancyAdvanced, DetectReentrancySimple, DetectInvalid, DetectUnusedRetVal, DetectUninitializedStorage, DetectIntegerOverflow, DetectSuicidal, DetectExternalCallAndLeak, DetectEnvInstruction, DetectUninitializedMemory, DetectDelegatecall
+2022-07-26 21:43:25,265: [919] m.main:INFO: Beginning analysis
+2022-07-26 21:43:25,272: [919] m.e.manticore:INFO: Starting symbolic create contract
+2022-07-26 21:43:25,284: [919] m.e.manticore:ERROR: Errors : Invalid solc compilation Error: Source "@openzeppelin/contracts/access/Ownable.sol" not found: File not found.
+ --> data/Devoleum.sol:4:1:
+  |
+4 | import "@openzeppelin/contracts/access/Ownable.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Error: Source "@openzeppelin/contracts/utils/math/SafeMath.sol" not found: File not found.
+ --> data/Devoleum.sol:5:1:
+  |
+5 | import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+. Solidity failed to generate bytecode for your contract. Check if all the abstract functions are implemented. 
+2022-07-26 21:43:25,343: [961] m.c.manticore:INFO: Generated testcase No. 0 - NO STATE RESULT (?)(0 txs)
+2022-07-26 21:43:25,452: [919] m.c.manticore:INFO: Results in /mcore_rn0s5ppi
+2022-07-26 21:43:25,856: [1220] m.main:INFO: Registered plugins: DetectUninitializedStorage, DetectInvalid, DetectDelegatecall, DetectUnusedRetVal, DetectSuicidal, DetectUninitializedMemory, DetectIntegerOverflow, DetectExternalCallAndLeak, DetectReentrancySimple, DetectEnvInstruction, DetectReentrancyAdvanced
+2022-07-26 21:43:25,856: [1220] m.main:INFO: Beginning analysis
+2022-07-26 21:43:25,863: [1220] m.e.manticore:INFO: Starting symbolic create contract
+2022-07-26 21:43:25,875: [1220] m.e.manticore:ERROR: Errors : Invalid solc compilation Error: Source "@openzeppelin/contracts/access/Ownable.sol" not found: File not found.
+ --> data/Devoleum.sol:4:1:
+  |
+4 | import "@openzeppelin/contracts/access/Ownable.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Error: Source "@openzeppelin/contracts/utils/math/SafeMath.sol" not found: File not found.
+ --> data/Devoleum.sol:5:1:
+  |
+5 | import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+. Solidity failed to generate bytecode for your contract. Check if all the abstract functions are implemented. 
+2022-07-26 21:43:25,933: [1262] m.c.manticore:INFO: Generated testcase No. 0 - NO STATE RESULT (?)(0 txs)
+2022-07-26 21:43:26,041: [1220] m.c.manticore:INFO: Results in /mcore_ljdq1392
+2022-07-26 21:43:26,448: [1521] m.main:INFO: Registered plugins: DetectIntegerOverflow, DetectUnusedRetVal, DetectReentrancySimple, DetectInvalid, DetectDelegatecall, DetectExternalCallAndLeak, DetectSuicidal, DetectUninitializedStorage, DetectEnvInstruction, DetectReentrancyAdvanced, DetectUninitializedMemory
+2022-07-26 21:43:26,449: [1521] m.main:INFO: Beginning analysis
+2022-07-26 21:43:26,456: [1521] m.e.manticore:INFO: Starting symbolic create contract
+2022-07-26 21:43:26,468: [1521] m.e.manticore:ERROR: Errors : Invalid solc compilation Error: Source "@openzeppelin/contracts/access/Ownable.sol" not found: File not found.
+ --> data/Devoleum.sol:4:1:
+  |
+4 | import "@openzeppelin/contracts/access/Ownable.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Error: Source "@openzeppelin/contracts/utils/math/SafeMath.sol" not found: File not found.
+ --> data/Devoleum.sol:5:1:
+  |
+5 | import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+. Solidity failed to generate bytecode for your contract. Check if all the abstract functions are implemented. 
+2022-07-26 21:43:26,512: [1564] m.c.manticore:INFO: Generated testcase No. 0 - NO STATE RESULT (?)(0 txs)
+2022-07-26 21:43:26,630: [1521] m.c.manticore:INFO: Results in /mcore_mjjtk469
+2022-07-26 21:43:27,034: [1822] m.main:INFO: Registered plugins: DetectDelegatecall, DetectIntegerOverflow, DetectReentrancySimple, DetectInvalid, DetectUnusedRetVal, DetectUninitializedStorage, DetectReentrancyAdvanced, DetectSuicidal, DetectExternalCallAndLeak, DetectEnvInstruction, DetectUninitializedMemory
+2022-07-26 21:43:27,034: [1822] m.main:INFO: Beginning analysis
+2022-07-26 21:43:27,041: [1822] m.e.manticore:INFO: Starting symbolic create contract
+2022-07-26 21:43:27,053: [1822] m.e.manticore:ERROR: Errors : Invalid solc compilation Error: Source "@openzeppelin/contracts/access/Ownable.sol" not found: File not found.
+ --> data/Devoleum.sol:4:1:
+  |
+4 | import "@openzeppelin/contracts/access/Ownable.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Error: Source "@openzeppelin/contracts/utils/math/SafeMath.sol" not found: File not found.
+ --> data/Devoleum.sol:5:1:
+  |
+5 | import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+. Solidity failed to generate bytecode for your contract. Check if all the abstract functions are implemented. 
+2022-07-26 21:43:27,112: [1864] m.c.manticore:INFO: Generated testcase No. 0 - NO STATE RESULT (?)(0 txs)
+2022-07-26 21:43:27,224: [1822] m.c.manticore:INFO: Results in /mcore_62obzpc8
+2022-07-26 21:43:27,630: [2123] m.main:INFO: Registered plugins: DetectUninitializedMemory, DetectReentrancyAdvanced, DetectDelegatecall, DetectReentrancySimple, DetectInvalid, DetectUnusedRetVal, DetectExternalCallAndLeak, DetectSuicidal, DetectUninitializedStorage, DetectIntegerOverflow, DetectEnvInstruction
+2022-07-26 21:43:27,630: [2123] m.main:INFO: Beginning analysis
+2022-07-26 21:43:27,637: [2123] m.e.manticore:INFO: Starting symbolic create contract
+2022-07-26 21:43:27,649: [2123] m.e.manticore:ERROR: Errors : Invalid solc compilation Error: Source "@openzeppelin/contracts/access/Ownable.sol" not found: File not found.
+ --> data/Devoleum.sol:4:1:
+  |
+4 | import "@openzeppelin/contracts/access/Ownable.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Error: Source "@openzeppelin/contracts/utils/math/SafeMath.sol" not found: File not found.
+ --> data/Devoleum.sol:5:1:
+  |
+5 | import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+. Solidity failed to generate bytecode for your contract. Check if all the abstract functions are implemented. 
+2022-07-26 21:43:27,712: [2165] m.c.manticore:INFO: Generated testcase No. 0 - NO STATE RESULT (?)(0 txs)
+2022-07-26 21:43:27,820: [2123] m.c.manticore:INFO: Results in /mcore_yqr9c85s
+usage: manticore [-h] [--compile-force-framework COMPILE_FORCE_FRAMEWORK]
+                 [--compile-remove-metadata]
+                 [--compile-custom-build COMPILE_CUSTOM_BUILD] [--solc SOLC]
+                 [--solc-remaps SOLC_REMAPS] [--solc-args SOLC_ARGS]
+                 [--solc-disable-warnings]
+                 [--solc-working-dir SOLC_WORKING_DIR]
+                 [--solc-solcs-select SOLC_SOLCS_SELECT]
+                 [--solc-solcs-bin SOLC_SOLCS_BIN] [--truffle-ignore-compile]
+                 [--truffle-build-directory TRUFFLE_BUILD_DIRECTORY]
+                 [--truffle-version TRUFFLE_VERSION] [--embark-ignore-compile]
+                 [--embark-overwrite-config] [--dapp-ignore-compile]
+                 [--etherlime-ignore-compile] [--etherlime-compile-arguments]
+                 [--coverage COVERAGE] [--no-colors] [--policy POLICY] [-v]
+                 [--workspace WORKSPACE] [--version] [--config CONFIG]
+                 [--entrysymbol ENTRYSYMBOL] [--data DATA] [--file FILES]
+                 [--env ENV] [--pure-symbolic] [--verbose-trace]
+                 [--txlimit TXLIMIT] [--txnocoverage] [--txnoether]
+                 [--txaccount TXACCOUNT] [--txpreconstrain]
+                 [--contract CONTRACT] [--list-detectors]
+                 [--exclude DETECTORS_TO_EXCLUDE] [--exclude-all]
+                 [--avoid-constant] [--limit-loops] [--no-testcases]
+                 [--smt.timeout SMT.TIMEOUT] [--smt.memory SMT.MEMORY]
+                 [--smt.maxsolutions SMT.MAXSOLUTIONS]
+                 [--smt.z3_bin SMT.Z3_BIN]
+                 [--smt.defaultunsat SMT.DEFAULTUNSAT]
+                 [--workspace.prefix WORKSPACE.PREFIX]
+                 [--workspace.dir WORKSPACE.DIR] [--core.timeout CORE.TIMEOUT]
+                 [--core.cluster CORE.CLUSTER] [--core.procs CORE.PROCS]
+                 [--core.mprocessing CORE.MPROCESSING] [--evm.oog EVM.OOG]
+                 [--evm.defaultgas EVM.DEFAULTGAS] [--cli.profile CLI.PROFILE]
+                 [--main.recursionlimit MAIN.RECURSIONLIMIT]
+                 [--native.stdin_size NATIVE.STDIN_SIZE]
+                 [argv [argv ...]]
+manticore: error: argument --contract: expected one argument
+mv: cannot stat '/mcore_*': No such file or directory
+2022-07-26 21:43:29,049: [2430] m.main:INFO: Registered plugins: DetectExternalCallAndLeak, DetectReentrancySimple, DetectInvalid, DetectSuicidal, DetectUnusedRetVal, DetectUninitializedStorage, DetectReentrancyAdvanced, DetectDelegatecall, DetectEnvInstruction, DetectIntegerOverflow, DetectUninitializedMemory
+2022-07-26 21:43:29,050: [2430] m.main:INFO: Beginning analysis
+2022-07-26 21:43:29,061: [2430] m.e.manticore:INFO: Starting symbolic create contract
+2022-07-26 21:43:29,074: [2430] m.e.manticore:ERROR: Errors : Invalid solc compilation Error: Source "@openzeppelin/contracts/access/Ownable.sol" not found: File not found.
+ --> data/Devoleum.sol:4:1:
+  |
+4 | import "@openzeppelin/contracts/access/Ownable.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Error: Source "@openzeppelin/contracts/utils/math/SafeMath.sol" not found: File not found.
+ --> data/Devoleum.sol:5:1:
+  |
+5 | import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+. Solidity failed to generate bytecode for your contract. Check if all the abstract functions are implemented. 
+2022-07-26 21:43:29,138: [2472] m.c.manticore:INFO: Generated testcase No. 0 - NO STATE RESULT (?)(0 txs)
+2022-07-26 21:43:29,241: [2430] m.c.manticore:INFO: Results in /mcore_kuby01ck
+2022-07-26 21:43:29,644: [2731] m.main:INFO: Registered plugins: DetectReentrancyAdvanced, DetectReentrancySimple, DetectInvalid, DetectUnusedRetVal, DetectUninitializedStorage, DetectIntegerOverflow, DetectSuicidal, DetectExternalCallAndLeak, DetectEnvInstruction, DetectUninitializedMemory, DetectDelegatecall
+2022-07-26 21:43:29,645: [2731] m.main:INFO: Beginning analysis
+2022-07-26 21:43:29,652: [2731] m.e.manticore:INFO: Starting symbolic create contract
+2022-07-26 21:43:29,664: [2731] m.e.manticore:ERROR: Errors : Invalid solc compilation Error: Source "@openzeppelin/contracts/access/Ownable.sol" not found: File not found.
+ --> data/Devoleum.sol:4:1:
+  |
+4 | import "@openzeppelin/contracts/access/Ownable.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Error: Source "@openzeppelin/contracts/utils/math/SafeMath.sol" not found: File not found.
+ --> data/Devoleum.sol:5:1:
+  |
+5 | import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+. Solidity failed to generate bytecode for your contract. Check if all the abstract functions are implemented. 
+2022-07-26 21:43:29,724: [2773] m.c.manticore:INFO: Generated testcase No. 0 - NO STATE RESULT (?)(0 txs)
+2022-07-26 21:43:29,841: [2731] m.c.manticore:INFO: Results in /mcore_9pfxhuzn
+2022-07-26 21:43:30,242: [3032] m.main:INFO: Registered plugins: DetectIntegerOverflow, DetectDelegatecall, DetectReentrancyAdvanced, DetectUnusedRetVal, DetectSuicidal, DetectExternalCallAndLeak, DetectUninitializedStorage, DetectReentrancySimple, DetectInvalid, DetectEnvInstruction, DetectUninitializedMemory
+2022-07-26 21:43:30,242: [3032] m.main:INFO: Beginning analysis
+2022-07-26 21:43:30,249: [3032] m.e.manticore:INFO: Starting symbolic create contract
+2022-07-26 21:43:30,261: [3032] m.e.manticore:ERROR: Errors : Invalid solc compilation Error: Source "@openzeppelin/contracts/access/Ownable.sol" not found: File not found.
+ --> data/Devoleum.sol:4:1:
+  |
+4 | import "@openzeppelin/contracts/access/Ownable.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Error: Source "@openzeppelin/contracts/utils/math/SafeMath.sol" not found: File not found.
+ --> data/Devoleum.sol:5:1:
+  |
+5 | import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+. Solidity failed to generate bytecode for your contract. Check if all the abstract functions are implemented. 
+2022-07-26 21:43:30,319: [3074] m.c.manticore:INFO: Generated testcase No. 0 - NO STATE RESULT (?)(0 txs)
+2022-07-26 21:43:30,430: [3032] m.c.manticore:INFO: Results in /mcore_qbb9rx6q
+2022-07-26 21:43:30,841: [3333] m.main:INFO: Registered plugins: DetectReentrancyAdvanced, DetectReentrancySimple, DetectInvalid, DetectUnusedRetVal, DetectUninitializedStorage, DetectSuicidal, DetectExternalCallAndLeak, DetectEnvInstruction, DetectUninitializedMemory, DetectDelegatecall, DetectIntegerOverflow
+2022-07-26 21:43:30,842: [3333] m.main:INFO: Beginning analysis
+2022-07-26 21:43:30,849: [3333] m.e.manticore:INFO: Starting symbolic create contract
+2022-07-26 21:43:30,861: [3333] m.e.manticore:ERROR: Errors : Invalid solc compilation Error: Source "@openzeppelin/contracts/access/Ownable.sol" not found: File not found.
+ --> data/Devoleum.sol:4:1:
+  |
+4 | import "@openzeppelin/contracts/access/Ownable.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Error: Source "@openzeppelin/contracts/utils/math/SafeMath.sol" not found: File not found.
+ --> data/Devoleum.sol:5:1:
+  |
+5 | import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+. Solidity failed to generate bytecode for your contract. Check if all the abstract functions are implemented. 
+2022-07-26 21:43:30,925: [3382] m.c.manticore:INFO: Generated testcase No. 0 - NO STATE RESULT (?)(0 txs)
+2022-07-26 21:43:31,025: [3333] m.c.manticore:INFO: Results in /mcore_uhqj_7sd
+2022-07-26 21:43:31,430: [3634] m.main:INFO: Registered plugins: DetectUninitializedMemory, DetectUnusedRetVal, DetectExternalCallAndLeak, DetectIntegerOverflow, DetectReentrancySimple, DetectInvalid, DetectSuicidal, DetectEnvInstruction, DetectReentrancyAdvanced, DetectUninitializedStorage, DetectDelegatecall
+2022-07-26 21:43:31,431: [3634] m.main:INFO: Beginning analysis
+2022-07-26 21:43:31,437: [3634] m.e.manticore:INFO: Starting symbolic create contract
+2022-07-26 21:43:31,449: [3634] m.e.manticore:ERROR: Errors : Invalid solc compilation Error: Source "@openzeppelin/contracts/access/Ownable.sol" not found: File not found.
+ --> data/Devoleum.sol:4:1:
+  |
+4 | import "@openzeppelin/contracts/access/Ownable.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Error: Source "@openzeppelin/contracts/utils/math/SafeMath.sol" not found: File not found.
+ --> data/Devoleum.sol:5:1:
+  |
+5 | import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+. Solidity failed to generate bytecode for your contract. Check if all the abstract functions are implemented. 
+2022-07-26 21:43:31,512: [3676] m.c.manticore:INFO: Generated testcase No. 0 - NO STATE RESULT (?)(0 txs)
+2022-07-26 21:43:31,628: [3634] m.c.manticore:INFO: Results in /mcore_ondryzzo
+2022-07-26 21:43:32,039: [3935] m.main:INFO: Registered plugins: DetectUnusedRetVal, DetectSuicidal, DetectReentrancySimple, DetectInvalid, DetectExternalCallAndLeak, DetectReentrancyAdvanced, DetectIntegerOverflow, DetectDelegatecall, DetectEnvInstruction, DetectUninitializedMemory, DetectUninitializedStorage
+2022-07-26 21:43:32,039: [3935] m.main:INFO: Beginning analysis
+2022-07-26 21:43:32,046: [3935] m.e.manticore:INFO: Starting symbolic create contract
+2022-07-26 21:43:32,058: [3935] m.e.manticore:ERROR: Errors : Invalid solc compilation Error: Source "@openzeppelin/contracts/access/Ownable.sol" not found: File not found.
+ --> data/Devoleum.sol:4:1:
+  |
+4 | import "@openzeppelin/contracts/access/Ownable.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Error: Source "@openzeppelin/contracts/utils/math/SafeMath.sol" not found: File not found.
+ --> data/Devoleum.sol:5:1:
+  |
+5 | import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+. Solidity failed to generate bytecode for your contract. Check if all the abstract functions are implemented. 
+2022-07-26 21:43:32,118: [3977] m.c.manticore:INFO: Generated testcase No. 0 - NO STATE RESULT (?)(0 txs)
+2022-07-26 21:43:32,222: [3935] m.c.manticore:INFO: Results in /mcore_2ogvr8c9
+2022-07-26 21:43:32,642: [4236] m.main:INFO: Registered plugins: DetectReentrancySimple, DetectInvalid, DetectUnusedRetVal, DetectUninitializedStorage, DetectExternalCallAndLeak, DetectSuicidal, DetectReentrancyAdvanced, DetectEnvInstruction, DetectUninitializedMemory, DetectDelegatecall, DetectIntegerOverflow
+2022-07-26 21:43:32,642: [4236] m.main:INFO: Beginning analysis
+2022-07-26 21:43:32,649: [4236] m.e.manticore:INFO: Starting symbolic create contract
+2022-07-26 21:43:32,661: [4236] m.e.manticore:ERROR: Errors : Invalid solc compilation Error: Source "@openzeppelin/contracts/access/Ownable.sol" not found: File not found.
+ --> data/Devoleum.sol:4:1:
+  |
+4 | import "@openzeppelin/contracts/access/Ownable.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Error: Source "@openzeppelin/contracts/utils/math/SafeMath.sol" not found: File not found.
+ --> data/Devoleum.sol:5:1:
+  |
+5 | import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+. Solidity failed to generate bytecode for your contract. Check if all the abstract functions are implemented. 
+2022-07-26 21:43:32,683: [4278] m.c.manticore:INFO: Generated testcase No. 0 - NO STATE RESULT (?)(0 txs)
+2022-07-26 21:43:32,840: [4236] m.c.manticore:INFO: Results in /mcore_t747cu7o
+2022-07-26 21:43:33,249: [4537] m.main:INFO: Registered plugins: DetectUnusedRetVal, DetectReentrancySimple, DetectInvalid, DetectExternalCallAndLeak, DetectSuicidal, DetectEnvInstruction, DetectUninitializedStorage, DetectIntegerOverflow, DetectReentrancyAdvanced, DetectDelegatecall, DetectUninitializedMemory
+2022-07-26 21:43:33,250: [4537] m.main:INFO: Beginning analysis
+2022-07-26 21:43:33,256: [4537] m.e.manticore:INFO: Starting symbolic create contract
+2022-07-26 21:43:33,268: [4537] m.e.manticore:ERROR: Errors : Invalid solc compilation Error: Source "@openzeppelin/contracts/access/Ownable.sol" not found: File not found.
+ --> data/Devoleum.sol:4:1:
+  |
+4 | import "@openzeppelin/contracts/access/Ownable.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Error: Source "@openzeppelin/contracts/utils/math/SafeMath.sol" not found: File not found.
+ --> data/Devoleum.sol:5:1:
+  |
+5 | import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+. Solidity failed to generate bytecode for your contract. Check if all the abstract functions are implemented. 
+2022-07-26 21:43:33,332: [4579] m.c.manticore:INFO: Generated testcase No. 0 - NO STATE RESULT (?)(0 txs)
+2022-07-26 21:43:33,452: [4537] m.c.manticore:INFO: Results in /mcore_8ka72anj
