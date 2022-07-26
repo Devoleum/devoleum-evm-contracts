@@ -38,9 +38,6 @@ jobs:
       - name: Show NodeJS version
         run: npm --version
 
-      - name: Install hardhat
-        run: npm install hardhat
-
       - name: Install Dependencies
         run: npm install
 
