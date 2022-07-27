@@ -11,8 +11,4 @@ contract DevoleumTest is Test {
     function setUp() public {
         d = new Devoleum();
     }
-
-    function testOwnership() public {
-        assertEq(d.owner(), msg.sender);
-    }
 }
