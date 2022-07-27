@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity 0.8.0;
+pragma solidity 0.8.15;
 
 import "forge-std/Test.sol";
 
@@ -12,7 +12,7 @@ contract DevoleumTest is Test {
         d = new Devoleum();
     }
 
-    function testStepsCounter() public {
-        assertEq(d.stepsCounter(), 0);
+    function testOwnership() public {
+        assertEq(d.owner(), msg.sender);
     }
 }

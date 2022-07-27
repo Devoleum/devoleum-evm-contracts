@@ -116,4 +116,52 @@ describe("Devoleum", function () {
     expect(hashDate.toNumber()).to.greaterThan(0);
     expect(hashDate).to.equal(timestampBefore);
   });
+
+  it("Should allow Owner to transfer ownership", async () => {
+    await devoleum.connect(owner).transferOwnership(addr1.address);
+    expect(await devoleum.owner()).to.equal(addr1.address);
+  });
+  it("Should NOT allow NOT Owner to transfer ownership", async () => {
+    await expect(
+      devoleum.connect(addr1).transferOwnership(addr1.address)
+    ).to.be.revertedWith("Only owner");
+    expect(await devoleum.owner()).to.equal(owner.address);
+  });
+  it("Should NOT allow Allowed to transfer ownership", async () => {
+    await devoleum.connect(owner).toggleAllowed(addrAllowed.address);
+    expect(await devoleum.allowed(addrAllowed.address)).to.equal(true);
+    await expect(
+      devoleum.connect(addrAllowed).transferOwnership(addr1.address)
+    ).to.be.revertedWith("Only owner");
+    expect(await devoleum.owner()).to.equal(owner.address);
+  });
+
+  it("Should allow new Owner to create a Step Proof", async () => {
+    await devoleum.connect(owner).transferOwnership(addr1.address);
+    expect(await devoleum.owner()).to.equal(addr1.address);
+
+    let tx = await devoleum
+      .connect(addr1)
+      .createStepProof(
+        "0x81e06a0cc6e6df1d07c55ce8a293172a44a4d9459fe9f99b3ec2c31b49dcb84c"
+      );
+    const blockNumBefore = await ethers.provider.getBlockNumber();
+    const blockBefore = await ethers.provider.getBlock(blockNumBefore);
+    const timestampBefore = blockBefore.timestamp;
+
+    await tx.wait();
+    let hashDate = await devoleum.hashToDate(
+      "0x81e06a0cc6e6df1d07c55ce8a293172a44a4d9459fe9f99b3ec2c31b49dcb84c"
+    );
+
+    expect(hashDate.toNumber()).to.greaterThan(0);
+    expect(hashDate).to.equal(timestampBefore);
+  });
+
+  it("Should new Owner to to toggle an Allowed address", async () => {
+    await devoleum.connect(owner).transferOwnership(addr1.address);
+    expect(await devoleum.owner()).to.equal(addr1.address);
+    await devoleum.connect(addr1).toggleAllowed(addrAllowed.address);
+    expect(await devoleum.allowed(addrAllowed.address)).to.equal(true);
+  });
 });

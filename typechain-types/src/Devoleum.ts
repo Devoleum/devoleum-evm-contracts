@@ -34,6 +34,7 @@ export interface DevoleumInterface extends utils.Interface {
     "owner()": FunctionFragment;
     "selfDisableAllowed()": FunctionFragment;
     "toggleAllowed(address)": FunctionFragment;
+    "transferOwnership(address)": FunctionFragment;
   };
 
   getFunction(
@@ -44,6 +45,7 @@ export interface DevoleumInterface extends utils.Interface {
       | "owner"
       | "selfDisableAllowed"
       | "toggleAllowed"
+      | "transferOwnership"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -67,6 +69,10 @@ export interface DevoleumInterface extends utils.Interface {
     functionFragment: "toggleAllowed",
     values: [PromiseOrValue<string>]
   ): string;
+  encodeFunctionData(
+    functionFragment: "transferOwnership",
+    values: [PromiseOrValue<string>]
+  ): string;
 
   decodeFunctionResult(functionFragment: "allowed", data: BytesLike): Result;
   decodeFunctionResult(
@@ -81,6 +87,10 @@ export interface DevoleumInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "toggleAllowed",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferOwnership",
     data: BytesLike
   ): Result;
 
@@ -155,6 +165,11 @@ export interface Devoleum extends BaseContract {
       _address: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    transferOwnership(
+      newOwner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
   };
 
   allowed(
@@ -183,6 +198,11 @@ export interface Devoleum extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  transferOwnership(
+    newOwner: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   callStatic: {
     allowed(
       arg0: PromiseOrValue<string>,
@@ -205,6 +225,11 @@ export interface Devoleum extends BaseContract {
 
     toggleAllowed(
       _address: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    transferOwnership(
+      newOwner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -246,6 +271,11 @@ export interface Devoleum extends BaseContract {
       _address: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    transferOwnership(
+      newOwner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -272,6 +302,11 @@ export interface Devoleum extends BaseContract {
 
     toggleAllowed(
       _address: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    transferOwnership(
+      newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };

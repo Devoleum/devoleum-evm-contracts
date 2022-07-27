@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.13;
+pragma solidity ^0.8.15;
 
 /// @title Devoleum
 /// @author Lorenzo Zaccagnini Elisa Romondia
@@ -32,6 +32,10 @@ contract Devoleum {
     }
 
     event StepProofCreated(bytes32 _hashOfJson, uint256 _createdAt);
+
+    function transferOwnership(address newOwner) external onlyOwner {
+        owner = newOwner;
+    }
 
     /// @notice Toggle allowed address
     /// @param _address Address to toggle
