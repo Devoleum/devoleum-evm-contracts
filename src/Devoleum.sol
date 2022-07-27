@@ -1,49 +1,62 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.0;
-
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+pragma solidity ^0.8.13;
 
 /// @title Devoleum
 /// @author Lorenzo Zaccagnini Elisa Romondia
 /// @notice You can use this contract for your JSONs notarization
 /// @dev All function calls are currently implemented without side effects
-contract Devoleum is Ownable {
-    using SafeMath for uint256;
+contract Devoleum {
+    address public owner;
 
-    struct Step {
-        uint256 createdAt;
-        string hashOfJson;
+    constructor() {
+        owner = msg.sender;
     }
 
-    //COUNTERS
-    uint256 public stepsCounter = 0;
-
-    //STRUCT MAPPINGS
-    mapping(uint256 => Step) public stepIdToStepInfo;
-    mapping(string => uint256) public hashToId;
-    event StepProofCreated(uint256 _id, string _hash);
+    mapping(bytes32 => uint256) public hashToDate;
+    mapping(address => bool) public allowed;
 
     //Modifiers
-    modifier noDuplicate(string memory _hashOfJson) {
-        require(hashToId[_hashOfJson] == 0, "duplicate");
+    modifier noDuplicate(bytes32 _hashOfJson) {
+        require(hashToDate[_hashOfJson] == 0, "duplicate");
         _;
+    }
+
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Only owner");
+        _;
+    }
+
+    modifier onlyAllowed() {
+        require(allowed[msg.sender] || msg.sender == owner, "Only allowed");
+        _;
+    }
+
+    event StepProofCreated(bytes32 _hashOfJson, uint256 _createdAt);
+
+    /// @notice Toggle allowed address
+    /// @param _address Address to toggle
+    function toggleAllowed(address _address) external onlyOwner {
+        allowed[_address] = !allowed[_address];
+    }
+
+    /// @notice Self Toggle allowed address
+    function selfDisableAllowed() external {
+        require(allowed[msg.sender], "Only allowed");
+        allowed[msg.sender] = false;
     }
 
     /// @notice Notarizes a supply chain Step Proof
     /// @param _hashOfJson The hash proof of the JSON file
-    /// @return stepID The numeric ID of the Step proof
-    function createStepProof(string calldata _hashOfJson)
+    /// @return _createdAt The numeric timestamp of the notarization
+    function createStepProof(bytes32 _hashOfJson)
         external
-        onlyOwner
+        onlyAllowed
         noDuplicate(_hashOfJson)
-        returns (uint256 stepID)
+        returns (uint256 _createdAt)
     {
-        Step memory newStep = Step(block.timestamp, _hashOfJson);
-        stepsCounter = stepsCounter.add(1);
-        stepIdToStepInfo[stepsCounter] = newStep;
-        hashToId[_hashOfJson] = stepsCounter;
-        emit StepProofCreated(stepsCounter, _hashOfJson);
-        return stepsCounter;
+        uint256 nowDate = block.timestamp;
+        hashToDate[_hashOfJson] = nowDate;
+        emit StepProofCreated(_hashOfJson, nowDate);
+        return hashToDate[_hashOfJson];
     }
 }

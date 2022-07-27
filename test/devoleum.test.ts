@@ -6,6 +6,7 @@ import { Devoleum } from "../typechain-types";
 describe("Devoleum", function () {
   let owner: SignerWithAddress;
   let addr1: SignerWithAddress;
+  let addrAllowed: SignerWithAddress;
   let devoleum: Devoleum;
 
   beforeEach(async function () {
@@ -13,7 +14,7 @@ describe("Devoleum", function () {
     devoleum = await Devoleum.deploy();
     await devoleum.deployed();
 
-    [owner, addr1] = await ethers.getSigners();
+    [owner, addr1, addrAllowed] = await ethers.getSigners();
   });
 
   it("Should set the first account as the owner", async () => {
@@ -24,43 +25,24 @@ describe("Devoleum", function () {
     let tx = await devoleum
       .connect(owner)
       .createStepProof(
-        "3bea53f3f773a4f85405cbd8537ed9cfceba61ac21ce6480011cba0ea"
+        "0x51e06a0cc6e6df1d07c55ce8a293172a44a4d9459fe9f99b3ec2c31b49dcb84c"
       );
-    await tx.wait();
-    let info = await devoleum.stepIdToStepInfo(1);
-    let hashToID = await devoleum.hashToId(
-      "3bea53f3f773a4f85405cbd8537ed9cfceba61ac21ce6480011cba0ea"
-    );
-
-    expect(info.hashOfJson).to.equal(
-      "3bea53f3f773a4f85405cbd8537ed9cfceba61ac21ce6480011cba0ea"
-    );
-    expect(hashToID).to.equal(1);
-  });
-
-  it("Should create another Step Proof as a Owner", async () => {
-    await devoleum
-      .connect(owner)
-      .createStepProof("abdv73a4f85405cbd8537ed9cfceba61ac21ce6480011cba0ea");
-    let tx = await devoleum
-      .connect(owner)
-      .createStepProof("abcv73a4f85405cbd8537ed9cfceba61ac21ce6480011cba0ea");
+    const blockNumBefore = await ethers.provider.getBlockNumber();
+    const blockBefore = await ethers.provider.getBlock(blockNumBefore);
+    const timestampBefore = blockBefore.timestamp;
 
     await tx.wait();
+    let hashDate = await devoleum.hashToDate(
+      "0x51e06a0cc6e6df1d07c55ce8a293172a44a4d9459fe9f99b3ec2c31b49dcb84c"
+    );
 
-    let info = await devoleum.stepIdToStepInfo(2);
-    let hashToID = await devoleum.hashToId(
-      "abcv73a4f85405cbd8537ed9cfceba61ac21ce6480011cba0ea"
-    );
-    expect(info.hashOfJson).to.equal(
-      "abcv73a4f85405cbd8537ed9cfceba61ac21ce6480011cba0ea"
-    );
-    expect(hashToID).to.equal(2);
+    expect(hashDate.toNumber()).to.greaterThan(0);
+    expect(hashDate).to.equal(timestampBefore);
   });
 
   it("Should NOT duplicate a Step Proof", async () => {
     let tx = await devoleum.createStepProof(
-      "3bea53f3f773a4f85405cbd8537ed9cfceba61ac21ce6480011cba0ea"
+      "0x51e06a0cc6e6df1d07c55ce8a293172a44a4d9459fe9f99b3ec2c31b49dcb84c"
     );
     await tx.wait();
 
@@ -68,17 +50,70 @@ describe("Devoleum", function () {
       devoleum
         .connect(owner)
         .createStepProof(
-          "3bea53f3f773a4f85405cbd8537ed9cfceba61ac21ce6480011cba0ea"
+          "0x51e06a0cc6e6df1d07c55ce8a293172a44a4d9459fe9f99b3ec2c31b49dcb84c"
         )
     ).to.be.revertedWith("duplicate");
   });
-  it("Should NOT create a Step Proof as NOT the Owner", async () => {
+  it("Should NOT create a Step Proof as NOT the Owner or Allowed", async () => {
     await expect(
       devoleum
         .connect(addr1)
         .createStepProof(
-          "3bea53f3f773a4fxxxx85405cbd8537ed9cfceba61ac21ce6480011cba0ea"
+          "0x61e06a0cc6e6df1d07c55ce8a293172a44a4d9459fe9f99b3ec2c31b49dcb84c"
         )
-    ).to.be.revertedWith("Ownable: caller is not the owner");
+    ).to.be.revertedWith("Only allowed");
+  });
+  it("Should let the Owner toggle an Allowed address", async () => {
+    await devoleum.connect(owner).toggleAllowed(addrAllowed.address);
+    expect(await devoleum.allowed(addrAllowed.address)).to.equal(true);
+  });
+  it("Should let the Allowed to disable own address", async () => {
+    await devoleum.connect(owner).toggleAllowed(addrAllowed.address);
+    expect(await devoleum.allowed(addrAllowed.address)).to.equal(true);
+    await devoleum.connect(addrAllowed).selfDisableAllowed();
+    expect(await devoleum.allowed(addrAllowed.address)).to.equal(false);
+  });
+  it("Should NOT let NOT Allowed to disable own address", async () => {
+    expect(await devoleum.allowed(addrAllowed.address)).to.equal(false);
+    await expect(
+      devoleum.connect(addrAllowed).selfDisableAllowed()
+    ).to.be.revertedWith("Only allowed");
+  });
+
+  it("Should NOT let non Owner to toggle an Allowed address", async () => {
+    await expect(
+      devoleum.connect(addr1).toggleAllowed(addr1.address)
+    ).to.be.revertedWith("Only owner");
+
+    expect(await devoleum.allowed(addr1.address)).to.equal(false);
+  });
+
+  it("Should NOT let an Allowed to toggle an Allowed address", async () => {
+    await devoleum.connect(owner).toggleAllowed(addrAllowed.address);
+    await expect(
+      devoleum.connect(addrAllowed).toggleAllowed(addr1.address)
+    ).to.be.revertedWith("Only owner");
+    expect(await devoleum.allowed(addrAllowed.address)).to.equal(true);
+  });
+
+  it("Should create a Step Proof as ALLOWED", async () => {
+    await devoleum.connect(owner).toggleAllowed(addrAllowed.address);
+
+    let tx = await devoleum
+      .connect(addrAllowed)
+      .createStepProof(
+        "0x71e06a0cc6e6df1d07c55ce8a293172a44a4d9459fe9f99b3ec2c31b49dcb84c"
+      );
+    const blockNumBefore = await ethers.provider.getBlockNumber();
+    const blockBefore = await ethers.provider.getBlock(blockNumBefore);
+    const timestampBefore = blockBefore.timestamp;
+
+    await tx.wait();
+    let hashDate = await devoleum.hashToDate(
+      "0x71e06a0cc6e6df1d07c55ce8a293172a44a4d9459fe9f99b3ec2c31b49dcb84c"
+    );
+
+    expect(hashDate.toNumber()).to.greaterThan(0);
+    expect(hashDate).to.equal(timestampBefore);
   });
 });

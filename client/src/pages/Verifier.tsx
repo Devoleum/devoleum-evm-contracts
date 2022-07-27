@@ -11,7 +11,7 @@ const Verifier: Component<IPageProps> = (props) => {
 
   const [step, setStep] = createSignal<IStep>({} as IStep);
   const [hash, setHash] = createSignal<string>("");
-  const [proof, setProof] = createSignal(null);
+  const [proof, setProof] = createSignal(0);
   const [error, setError] = createSignal("");
   const [itemId, setItemId] = createSignal<string>(id);
 
@@ -26,14 +26,15 @@ const Verifier: Component<IPageProps> = (props) => {
     );
     const jsonContent = await getData(step.uri);
 
-    setHash(await calcHash(JSON.stringify(jsonContent), step.randomizeProof));
+    setHash(
+      "0x" + (await calcHash(JSON.stringify(jsonContent), step.randomizeProof))
+    );
     setStep(step);
     await getProof();
   };
   const getProof = async () => {
-    const arrayId = await props.contract.hashToId(hash());
-    const blockchainStep = await props.contract.stepIdToStepInfo(arrayId);
-    await setProof(blockchainStep[1]);
+    const notarizationDate = await props.contract.hashToDate(hash());
+    await setProof(notarizationDate);
   };
 
   return (
@@ -61,7 +62,7 @@ const Verifier: Component<IPageProps> = (props) => {
         <div>
           <div class="tab-with-corner">
             Devoleum Step{" - "}
-            {proof() === hash() ? (
+            {proof() > 0 ? (
               <span style={{ color: " #44f1a6" }}>Matching</span>
             ) : (
               <span style={{ color: "red" }}>Not Matching</span>

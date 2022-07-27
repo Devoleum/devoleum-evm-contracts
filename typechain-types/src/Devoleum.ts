@@ -4,7 +4,6 @@
 import type {
   BaseContract,
   BigNumber,
-  BigNumberish,
   BytesLike,
   CallOverrides,
   ContractTransaction,
@@ -29,102 +28,75 @@ import type {
 
 export interface DevoleumInterface extends utils.Interface {
   functions: {
-    "createStepProof(string)": FunctionFragment;
-    "hashToId(string)": FunctionFragment;
+    "allowed(address)": FunctionFragment;
+    "createStepProof(bytes32)": FunctionFragment;
+    "hashToDate(bytes32)": FunctionFragment;
     "owner()": FunctionFragment;
-    "renounceOwnership()": FunctionFragment;
-    "stepIdToStepInfo(uint256)": FunctionFragment;
-    "stepsCounter()": FunctionFragment;
-    "transferOwnership(address)": FunctionFragment;
+    "selfDisableAllowed()": FunctionFragment;
+    "toggleAllowed(address)": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "allowed"
       | "createStepProof"
-      | "hashToId"
+      | "hashToDate"
       | "owner"
-      | "renounceOwnership"
-      | "stepIdToStepInfo"
-      | "stepsCounter"
-      | "transferOwnership"
+      | "selfDisableAllowed"
+      | "toggleAllowed"
   ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "createStepProof",
+    functionFragment: "allowed",
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "hashToId",
-    values: [PromiseOrValue<string>]
+    functionFragment: "createStepProof",
+    values: [PromiseOrValue<BytesLike>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "hashToDate",
+    values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "renounceOwnership",
+    functionFragment: "selfDisableAllowed",
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "stepIdToStepInfo",
-    values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "stepsCounter",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferOwnership",
+    functionFragment: "toggleAllowed",
     values: [PromiseOrValue<string>]
   ): string;
 
+  decodeFunctionResult(functionFragment: "allowed", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "createStepProof",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "hashToId", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "hashToDate", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "renounceOwnership",
+    functionFragment: "selfDisableAllowed",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "stepIdToStepInfo",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "stepsCounter",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transferOwnership",
+    functionFragment: "toggleAllowed",
     data: BytesLike
   ): Result;
 
   events: {
-    "OwnershipTransferred(address,address)": EventFragment;
-    "StepProofCreated(uint256,string)": EventFragment;
+    "StepProofCreated(bytes32,uint256)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "StepProofCreated"): EventFragment;
 }
 
-export interface OwnershipTransferredEventObject {
-  previousOwner: string;
-  newOwner: string;
-}
-export type OwnershipTransferredEvent = TypedEvent<
-  [string, string],
-  OwnershipTransferredEventObject
->;
-
-export type OwnershipTransferredEventFilter =
-  TypedEventFilter<OwnershipTransferredEvent>;
-
 export interface StepProofCreatedEventObject {
-  _id: BigNumber;
-  _hash: string;
+  _hashOfJson: string;
+  _createdAt: BigNumber;
 }
 export type StepProofCreatedEvent = TypedEvent<
-  [BigNumber, string],
+  [string, BigNumber],
   StepProofCreatedEventObject
 >;
 
@@ -158,170 +130,148 @@ export interface Devoleum extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    allowed(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
     createStepProof(
-      _hashOfJson: PromiseOrValue<string>,
+      _hashOfJson: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    hashToId(
-      arg0: PromiseOrValue<string>,
+    hashToDate(
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
-    renounceOwnership(
+    selfDisableAllowed(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    stepIdToStepInfo(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, string] & { createdAt: BigNumber; hashOfJson: string }
-    >;
-
-    stepsCounter(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    transferOwnership(
-      newOwner: PromiseOrValue<string>,
+    toggleAllowed(
+      _address: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
+  allowed(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
   createStepProof(
-    _hashOfJson: PromiseOrValue<string>,
+    _hashOfJson: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  hashToId(
-    arg0: PromiseOrValue<string>,
+  hashToDate(
+    arg0: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   owner(overrides?: CallOverrides): Promise<string>;
 
-  renounceOwnership(
+  selfDisableAllowed(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  stepIdToStepInfo(
-    arg0: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<
-    [BigNumber, string] & { createdAt: BigNumber; hashOfJson: string }
-  >;
-
-  stepsCounter(overrides?: CallOverrides): Promise<BigNumber>;
-
-  transferOwnership(
-    newOwner: PromiseOrValue<string>,
+  toggleAllowed(
+    _address: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    allowed(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
     createStepProof(
-      _hashOfJson: PromiseOrValue<string>,
+      _hashOfJson: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    hashToId(
-      arg0: PromiseOrValue<string>,
+    hashToDate(
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
-    renounceOwnership(overrides?: CallOverrides): Promise<void>;
+    selfDisableAllowed(overrides?: CallOverrides): Promise<void>;
 
-    stepIdToStepInfo(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, string] & { createdAt: BigNumber; hashOfJson: string }
-    >;
-
-    stepsCounter(overrides?: CallOverrides): Promise<BigNumber>;
-
-    transferOwnership(
-      newOwner: PromiseOrValue<string>,
+    toggleAllowed(
+      _address: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
 
   filters: {
-    "OwnershipTransferred(address,address)"(
-      previousOwner?: PromiseOrValue<string> | null,
-      newOwner?: PromiseOrValue<string> | null
-    ): OwnershipTransferredEventFilter;
-    OwnershipTransferred(
-      previousOwner?: PromiseOrValue<string> | null,
-      newOwner?: PromiseOrValue<string> | null
-    ): OwnershipTransferredEventFilter;
-
-    "StepProofCreated(uint256,string)"(
-      _id?: null,
-      _hash?: null
+    "StepProofCreated(bytes32,uint256)"(
+      _hashOfJson?: null,
+      _createdAt?: null
     ): StepProofCreatedEventFilter;
-    StepProofCreated(_id?: null, _hash?: null): StepProofCreatedEventFilter;
+    StepProofCreated(
+      _hashOfJson?: null,
+      _createdAt?: null
+    ): StepProofCreatedEventFilter;
   };
 
   estimateGas: {
+    allowed(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     createStepProof(
-      _hashOfJson: PromiseOrValue<string>,
+      _hashOfJson: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    hashToId(
-      arg0: PromiseOrValue<string>,
+    hashToDate(
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
-    renounceOwnership(
+    selfDisableAllowed(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    stepIdToStepInfo(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    stepsCounter(overrides?: CallOverrides): Promise<BigNumber>;
-
-    transferOwnership(
-      newOwner: PromiseOrValue<string>,
+    toggleAllowed(
+      _address: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
+    allowed(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     createStepProof(
-      _hashOfJson: PromiseOrValue<string>,
+      _hashOfJson: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    hashToId(
-      arg0: PromiseOrValue<string>,
+    hashToDate(
+      arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    renounceOwnership(
+    selfDisableAllowed(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    stepIdToStepInfo(
-      arg0: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    stepsCounter(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    transferOwnership(
-      newOwner: PromiseOrValue<string>,
+    toggleAllowed(
+      _address: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };

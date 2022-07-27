@@ -43,7 +43,7 @@ const NotarizeMany: Component<IPageProps> = (props) => {
     idx: number
   ) => {
     console.log("get hash: ", calcHash, "get id: ", stepId);
-    const tx = await props.contract.createStepProof(calcHash);
+    const tx = await props.contract.createStepProof(`0x${calcHash}`);
 
     await tx.wait();
     let txurl;

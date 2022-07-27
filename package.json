@@ -10,7 +10,7 @@
     "test": "hardhat test",
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite build && vite preview"
   },
   "author": "Lorenzo Zaccagnini",
   "license": "AGPL 3.0",
