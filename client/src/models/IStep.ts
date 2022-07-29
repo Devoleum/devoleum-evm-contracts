@@ -13,7 +13,7 @@ export interface IStep {
   user: Oid;
   name: string;
   uri: string;
-  randomizeProof: string;
+  randomizeProof: string | null;
   historyId: Oid;
   createdAt: Date;
   updatedAt: Date;

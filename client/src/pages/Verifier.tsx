@@ -24,6 +24,7 @@ const Verifier: Component<IPageProps> = (props) => {
     let step: IStep = await getData(
       `${import.meta.env.VITE_API_BASE_URL}/api/steps/${itemId()}`
     );
+    if (!step.randomizeProof) return;
     const jsonContent = await getData(step.uri);
 
     setHash(

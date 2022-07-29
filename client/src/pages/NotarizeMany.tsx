@@ -1,19 +1,23 @@
 /** @jsxImportSource solid-js */
-import { Component, createSignal, For, Show } from "solid-js";
+import { Component, createSignal, For, onMount, Show } from "solid-js";
 import { IStep } from "../models/IStep";
 import { calcHash, getData } from "../utils/api";
 import Login from "../components/Login";
-import { useBlockhain } from "../components/BlockchainCtx";
 import { IPageProps } from "../models/IPage";
 import { chainEnum } from "../models/ContractAddress";
 
 const NotarizeMany: Component<IPageProps> = (props) => {
   const [steps, setSteps] = createSignal<IStep[]>([] as IStep[]);
   const [txMessage, setTxMessage] = createSignal("");
+  const [isValidToken, setIsValidToken] = createSignal(false);
   const blockchainNameAttr: string =
     props.contract.address === chainEnum.POLYGON
       ? "polygon_matic_v2_notarization"
       : "sepolia_test_eth_notarization";
+
+  onMount(async () => {
+    setIsValidToken(await isValidTokenCheck());
+  });
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -32,6 +36,7 @@ const NotarizeMany: Component<IPageProps> = (props) => {
   };
 
   const populateStep = async (step: IStep) => {
+    if (!step.randomizeProof) return;
     const jsonContent = await getData(step.uri);
     step.calcHash = await calcHash(
       JSON.stringify(jsonContent),
@@ -46,6 +51,9 @@ const NotarizeMany: Component<IPageProps> = (props) => {
   ) => {
     console.log("get hash: ", calcHash, "get id: ", stepId);
     console.log("get signer: ", props.signer);
+
+    const valid = await isValidTokenCheck();
+    if (!valid) return null;
 
     if (!props.signer) return;
     const devoleumWithSigner = props.contract.connect(props.signer);
@@ -79,15 +87,14 @@ const NotarizeMany: Component<IPageProps> = (props) => {
     calchash: string,
     stepId: string
   ) => {
+    const token = JSON.parse(localStorage.getItem("userInfo") as string).token;
     const response = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/steps/evm/${stepId}`,
       {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("userInfo")).token
-          }`,
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           txurl: txurl,
@@ -102,13 +109,36 @@ const NotarizeMany: Component<IPageProps> = (props) => {
     return jsonRes;
   };
 
+  const isValidTokenCheck = async (): Promise<boolean> => {
+    let token = JSON.parse(localStorage.getItem("userInfo") as string).token;
+    const response = await fetch(
+      `${import.meta.env.VITE_API_BASE_URL}/api/users/protected`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const jsonRes = await response.json();
+    console.log("get isValidTokenCheck response: ", jsonRes);
+    if (jsonRes !== "protected") {
+      localStorage.removeItem("userInfo");
+      return false;
+    }
+    if (jsonRes === "protected") return true;
+    return false;
+  };
+
   return (
     <div>
       <h2 class="sub-title">Notarizer</h2>
       <div>
         <Show
-          when={props.signer && localStorage.getItem("userInfo")}
-          fallback={<Login />}
+          when={props.signer && isValidToken()}
+          fallback={<Login onComplete={(res) => setIsValidToken(true)} />}
         >
           <div class="row">
             <div>
@@ -151,7 +181,6 @@ const NotarizeMany: Component<IPageProps> = (props) => {
                       {(step, idx) => (
                         <tr>
                           <td>
-                            {step.randomizeProof}
                             {step.name}
                             {!step[blockchainNameAttr] && (
                               <div style={{ wordBreak: "break-all" }}>
