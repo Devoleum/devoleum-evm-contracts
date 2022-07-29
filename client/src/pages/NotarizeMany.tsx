@@ -1,19 +1,19 @@
 /** @jsxImportSource solid-js */
-import { Component, createSignal, For } from "solid-js";
+import { Component, createSignal, For, Show } from "solid-js";
 import { IStep } from "../models/IStep";
 import { calcHash, getData } from "../utils/api";
 import Login from "../components/Login";
 import { useBlockhain } from "../components/BlockchainCtx";
 import { IPageProps } from "../models/IPage";
+import { chainEnum } from "../models/ContractAddress";
 
 const NotarizeMany: Component<IPageProps> = (props) => {
   const [steps, setSteps] = createSignal<IStep[]>([] as IStep[]);
-  const [stepsCounter, setStepsCounter] = createSignal(0);
   const [txMessage, setTxMessage] = createSignal("");
-  const blockchainNameAttr =
-    props.blockchainName === "Polygon Matic"
-      ? "polygon_matic_notarization"
-      : "test_eth_notarization";
+  const blockchainNameAttr: string =
+    props.contract.address === chainEnum.POLYGON
+      ? "polygon_matic_v2_notarization"
+      : "sepolia_test_eth_notarization";
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -21,8 +21,10 @@ const NotarizeMany: Component<IPageProps> = (props) => {
     let steps = await getData(
       `${import.meta.env.VITE_API_BASE_URL}/api/steps/history/${
         historyId.value
-      }/steps`
+      }`
     );
+    console.log(steps);
+
     for (let step of steps) {
       await populateStep(step);
     }
@@ -43,29 +45,30 @@ const NotarizeMany: Component<IPageProps> = (props) => {
     idx: number
   ) => {
     console.log("get hash: ", calcHash, "get id: ", stepId);
-    const tx = await props.contract.createStepProof(`0x${calcHash}`);
+    console.log("get signer: ", props.signer);
+
+    if (!props.signer) return;
+    const devoleumWithSigner = props.contract.connect(props.signer);
+    const tx = await devoleumWithSigner.createStepProof(`0x${calcHash}`);
 
     await tx.wait();
-    let txurl;
+    console.log("tx: ", tx.hash);
+
+    let txurl = "";
 
     if (!tx.hash) {
       console.error("emtpy txhash");
       return;
     }
-    if (props.blockchainName === "Ethereum Rinkeby") {
-      txurl = `https://rinkeby.etherscan.io/tx/${tx.hash}`.toString();
+    if (props.contract.address === chainEnum.SEPOLIA) {
+      txurl = `https://sepolia.etherscan.io/tx/${tx.hash}`;
     }
-    if (props.blockchainName === "Polygon Matic") {
-      txurl = `https://polygonscan.com/tx/${tx.hash}`.toString();
+    if (props.contract.address === chainEnum.POLYGON) {
+      txurl = `https://polygonscan.com/tx/${tx.hash}`;
     }
     console.log("get tx hash: ", txurl);
     setTxMessage(txurl);
-    const jsonRes = await notarizeMongo(
-      txurl,
-      calcHash,
-      stepId,
-      props.blockchainName
-    );
+    const jsonRes = await notarizeMongo(txurl, calcHash, stepId);
     let updatedSteps = [...steps()];
     updatedSteps[idx] = jsonRes;
     setSteps(updatedSteps);
@@ -74,8 +77,7 @@ const NotarizeMany: Component<IPageProps> = (props) => {
   const notarizeMongo = async (
     txurl: string,
     calchash: string,
-    stepId: string,
-    chainName: string
+    stepId: string
   ) => {
     const response = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/api/steps/evm/${stepId}`,
@@ -84,13 +86,13 @@ const NotarizeMany: Component<IPageProps> = (props) => {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("userInfo") || "").token
+            JSON.parse(localStorage.getItem("userInfo")).token
           }`,
         },
         body: JSON.stringify({
           txurl: txurl,
-          calchash: calchash,
-          chainName: chainName,
+          hash: calchash,
+          chain_name: blockchainNameAttr,
         }),
       }
     );
@@ -104,85 +106,89 @@ const NotarizeMany: Component<IPageProps> = (props) => {
     <div>
       <h2 class="sub-title">Notarizer</h2>
       <div>
-        <Login />
-
-        <div class="row">
-          <div>
-            <h4>1. Get Steps</h4>
-            <p>Here the admin can notarize multiple proofs</p>
+        <Show
+          when={props.signer && localStorage.getItem("userInfo")}
+          fallback={<Login />}
+        >
+          <div class="row">
             <div>
-              <a href={txMessage()} target="_blank">
-                {txMessage()}
-              </a>
-            </div>
-            <form onSubmit={handleSubmit}>
-              <div class="row">
-                <input
-                  class="input"
-                  type="text"
-                  placeholder="History id"
-                  id="historyId"
-                />
+              <h4>1. Get Steps</h4>
+              <p>Here the admin can notarize multiple proofs</p>
+              <div>
+                <a href={txMessage()} target="_blank">
+                  {txMessage()}
+                </a>
               </div>
-              <input
-                class="button"
-                type="submit"
-                id="getInfo"
-                value="Get Info"
-              />
-            </form>
-          </div>
-          {steps && (
-            <div class="twelve columns" id="stepContainer">
-              <h4>2. Notarize</h4>
-              <table class="u-full-width" id="stepTable">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Notarize</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <For each={steps()} fallback={<div>Loading...</div>}>
-                    {(step, idx) => (
-                      <tr>
-                        <td>
-                          {step.name}
-                          {!step[blockchainNameAttr] && (
-                            <div style={{ wordBreak: "break-all" }}>
-                              {step.calcHash}
-                            </div>
-                          )}
-                        </td>
-                        <td>
-                          {step[blockchainNameAttr] ? (
-                            <div>Done</div>
-                          ) : (
-                            <input
-                              class="button"
-                              type="button"
-                              id="btnnotarize"
-                              value="GO"
-                              onClick={() =>
-                                notarizeProof(
-                                  step.calcHash ? step.calcHash : "",
-                                  step._id.$oid,
-                                  idx()
-                                )
-                              }
-                            />
-                          )}
-                        </td>
-                      </tr>
-                    )}
-                  </For>
-                </tbody>
-              </table>
-
-              <div>{txMessage()}</div>
+              <form onSubmit={handleSubmit}>
+                <div class="row">
+                  <input
+                    class="input"
+                    type="text"
+                    placeholder="History id"
+                    id="historyId"
+                  />
+                </div>
+                <input
+                  class="button"
+                  type="submit"
+                  id="getInfo"
+                  value="Get Info"
+                />
+              </form>
             </div>
-          )}
-        </div>
+            {steps && (
+              <div class="twelve columns" id="stepContainer">
+                <h4>2. Notarize</h4>
+                <table class="u-full-width" id="stepTable">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Notarize</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <For each={steps()} fallback={<div>Loading...</div>}>
+                      {(step, idx) => (
+                        <tr>
+                          <td>
+                            {step.randomizeProof}
+                            {step.name}
+                            {!step[blockchainNameAttr] && (
+                              <div style={{ wordBreak: "break-all" }}>
+                                {step.calcHash}
+                              </div>
+                            )}
+                          </td>
+                          <td>
+                            {step[blockchainNameAttr] ? (
+                              <div>Done</div>
+                            ) : (
+                              <input
+                                class="button"
+                                type="button"
+                                id="btnnotarize"
+                                value="GO"
+                                onClick={() =>
+                                  notarizeProof(
+                                    step.calcHash ? step.calcHash : "",
+                                    step._id.$oid,
+                                    idx()
+                                  )
+                                }
+                              />
+                            )}
+                          </td>
+                        </tr>
+                      )}
+                    </For>
+                  </tbody>
+                </table>
+
+                <div>{txMessage()}</div>
+              </div>
+            )}
+          </div>
+        </Show>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 /** @jsxImportSource solid-js */
-import { Component } from "solid-js";
+import { Component, onMount } from "solid-js";
 
 const Login: Component = () => {
   const handleSubmit = async (e: any) => {
@@ -23,11 +23,17 @@ const Login: Component = () => {
     localStorage.setItem("userInfo", JSON.stringify(data));
   };
 
-  if (
-    JSON.parse(localStorage.getItem("userInfo") || "") &&
-    JSON.parse(localStorage.getItem("userInfo") || "").isAdmin
-  )
-    return null;
+  const payload: any = atob(localStorage.getItem("userInfo").split(".")[1]);
+
+  const expiration = new Date(payload.exp);
+  const now = new Date();
+  const fiveMinutes = 1000 * 60 * 5;
+
+  if (expiration.getTime() - now.getTime() < fiveMinutes) {
+    console.log("JWT has expired or will expire soon");
+  } else {
+    console.log("JWT is valid for more than 5 minutes", payload);
+  }
 
   return (
     <div class="row">

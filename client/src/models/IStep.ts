@@ -3,6 +3,7 @@ export interface IStep {
   featured: boolean;
   main_eth_notarization: string;
   test_eth_notarization: string;
+  sepolia_test_eth_notarization: string;
   main_algo_notarization: string;
   polygon_matic_notarization: string;
   test_algo_notarization: string;
