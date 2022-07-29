@@ -1,0 +1,62 @@
+{
+  "analysis": {
+    "data/Devoleum.sol:Devoleum": {
+      "results": {
+        "DAO": {
+          "conflicts": [],
+          "safe": [],
+          "violations": [],
+          "warnings": []
+        },
+        "DAOConstantGas": {
+          "conflicts": [],
+          "safe": [],
+          "violations": [],
+          "warnings": []
+        },
+        "MissingInputValidation": {
+          "conflicts": [],
+          "safe": [],
+          "violations": [],
+          "warnings": []
+        },
+        "TODAmount": {
+          "conflicts": [],
+          "safe": [],
+          "violations": [],
+          "warnings": []
+        },
+        "TODReceiver": {
+          "conflicts": [],
+          "safe": [],
+          "violations": [],
+          "warnings": []
+        },
+        "TODTransfer": {
+          "conflicts": [],
+          "safe": [],
+          "violations": [],
+          "warnings": []
+        },
+        "UnhandledException": {
+          "conflicts": [],
+          "safe": [],
+          "violations": [],
+          "warnings": []
+        },
+        "UnrestrictedEtherFlow": {
+          "conflicts": [],
+          "safe": [],
+          "violations": [],
+          "warnings": []
+        }
+      }
+    }
+  },
+  "contract": "/home/runner/work/devoleum-eth-notarization-muninn/devoleum-eth-notarization-muninn/src/Devoleum.sol",
+  "duration": 1.8838977813720703,
+  "end": 1659127706.014127,
+  "exit_code": 0,
+  "start": 1659127704.1302292,
+  "tool": "securify"
+}
