@@ -1,0 +1,8 @@
+{
+  "contract": "/home/runner/work/devoleum-eth-notarization-muninn/devoleum-eth-notarization-muninn/src/Devoleum.sol",
+  "tool": "conkas",
+  "start": 1659134928.5017996,
+  "end": 1659134931.0576038,
+  "duration": 2.5558042526245117,
+  "exit_code": 1
+}

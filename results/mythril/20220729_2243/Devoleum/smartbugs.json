@@ -1,0 +1,8 @@
+{
+  "contract": "/home/runner/work/devoleum-eth-notarization-muninn/devoleum-eth-notarization-muninn/src/Devoleum.sol",
+  "tool": "mythril",
+  "start": 1659134925.547768,
+  "end": 1659134927.379136,
+  "duration": 1.8313679695129395,
+  "exit_code": 1
+}

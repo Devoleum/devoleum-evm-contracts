@@ -1,0 +1,46 @@
+Arguments passed: ['smartBugs.py', '--tool', 'all', '--file', '/home/runner/work/devoleum-eth-notarization-muninn/devoleum-eth-notarization-muninn/src/Devoleum.sol']
+Pulling image smartbugs/maian:solc5.10, this may take a while ...
+Image smartbugs/maian:solc5.10 pulled
+Pulling image christoftorres/osiris, this may take a while ...
+Image christoftorres/osiris pulled
+Pulling image trailofbits/slither, this may take a while ...
+Image trailofbits/slither pulled
+Pulling image qspprotocol/securify-usolc, this may take a while ...
+Image qspprotocol/securify-usolc pulled
+Pulling image nveloso/conkas, this may take a while ...
+Image nveloso/conkas pulled
+Pulling image christoftorres/honeybadger, this may take a while ...
+Image christoftorres/honeybadger pulled
+Pulling image qspprotocol/oyente-0.4.25, this may take a while ...
+Image qspprotocol/oyente-0.4.25 pulled
+Pulling image qspprotocol/mythril-usolc, this may take a while ...
+Image qspprotocol/mythril-usolc pulled
+Pulling image smartbugs/manticore, this may take a while ...
+Image smartbugs/manticore pulled
+Pulling image smartbugs/smartcheck, this may take a while ...
+Image smartbugs/smartcheck pulled
+Pulling image smartbugs/solhint, this may take a while ...
+Image smartbugs/solhint pulled
+Solc experienced a fatal error. Check the results file for more info
+oyente, /home/runner/work/devoleum-eth-notarization-muninn/devoleum-eth-notarization-muninn/src/Devoleum.sol
+[1/11] /home/runner/work/devoleum-eth-notarization-muninn/devoleum-eth-notarization-muninn/src/Devoleum.sol [oyente] in 0:00:02
+[2/11] /home/runner/work/devoleum-eth-notarization-muninn/devoleum-eth-notarization-muninn/src/Devoleum.sol [maian] in 0:00:41
+[3/11] /home/runner/work/devoleum-eth-notarization-muninn/devoleum-eth-notarization-muninn/src/Devoleum.sol [solhint] in 0:00:01
+Solc experienced a fatal error. Check the results file for more info
+honeybadger, /home/runner/work/devoleum-eth-notarization-muninn/devoleum-eth-notarization-muninn/src/Devoleum.sol
+[4/11] /home/runner/work/devoleum-eth-notarization-muninn/devoleum-eth-notarization-muninn/src/Devoleum.sol [honeybadger] in 0:00:01
+[5/11] /home/runner/work/devoleum-eth-notarization-muninn/devoleum-eth-notarization-muninn/src/Devoleum.sol [securify] in 0:00:02
+Solc experienced a fatal error. Check the results file for more info
+osiris, /home/runner/work/devoleum-eth-notarization-muninn/devoleum-eth-notarization-muninn/src/Devoleum.sol
+[6/11] /home/runner/work/devoleum-eth-notarization-muninn/devoleum-eth-notarization-muninn/src/Devoleum.sol [osiris] in 0:00:01
+[7/11] /home/runner/work/devoleum-eth-notarization-muninn/devoleum-eth-notarization-muninn/src/Devoleum.sol [smartcheck] in 0:00:03
+[8/11] /home/runner/work/devoleum-eth-notarization-muninn/devoleum-eth-notarization-muninn/src/Devoleum.sol [manticore] in 0:00:01
+Error parsing output of mythril for file /home/runner/work/devoleum-eth-notarization-muninn/devoleum-eth-notarization-muninn/src/Devoleum.sol
+Expecting value: line 1 column 1 (char 0)
+[9/11] /home/runner/work/devoleum-eth-notarization-muninn/devoleum-eth-notarization-muninn/src/Devoleum.sol [mythril] in 0:00:02
+slither, /home/runner/work/devoleum-eth-notarization-muninn/devoleum-eth-notarization-muninn/src/Devoleum.sol: Failing to copy /output.json from container to None.
+404 Client Error for http+docker://localhost/v1.41/containers/f26a2facbcb3dd005457fb687c2e6d31143c5c5670a6f4b25a6bf7c24fd89e06/archive?path=%2Foutput.json: Not Found ("Could not find the file /output.json in container f26a2facbcb3dd005457fb687c2e6d31143c5c5670a6f4b25a6bf7c24fd89e06")
+[10/11] /home/runner/work/devoleum-eth-notarization-muninn/devoleum-eth-notarization-muninn/src/Devoleum.sol [slither] in 0:00:01
+[11/11] /home/runner/work/devoleum-eth-notarization-muninn/devoleum-eth-notarization-muninn/src/Devoleum.sol [conkas] in 0:00:03
+Analysis completed. 
+It took 0:05:17 to analyse all files.
