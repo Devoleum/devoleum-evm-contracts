@@ -49,9 +49,6 @@ const NotarizeMany: Component<IPageProps> = (props) => {
     stepId: string,
     idx: number
   ) => {
-    console.log("get hash: ", calcHash, "get id: ", stepId);
-    console.log("get signer: ", props.signer);
-
     const valid = await isValidTokenCheck();
     if (!valid) return null;
 
@@ -104,8 +101,6 @@ const NotarizeMany: Component<IPageProps> = (props) => {
       }
     );
     const jsonRes = await response.json();
-    console.log("get notarizeMongo response: ", jsonRes);
-
     return jsonRes;
   };
 
@@ -123,7 +118,6 @@ const NotarizeMany: Component<IPageProps> = (props) => {
     );
 
     const jsonRes = await response.json();
-    console.log("get isValidTokenCheck response: ", jsonRes);
     if (jsonRes !== "protected") {
       localStorage.removeItem("userInfo");
       return false;

@@ -4,9 +4,10 @@ import { Component, createSignal } from "solid-js";
 import { IStep } from "../models/IStep";
 import { calcHash, getData } from "../utils/api";
 import { IPageProps } from "../models/IPage";
+import { chainEnum } from "../models/ContractAddress";
 
 const Verifier: Component<IPageProps> = (props) => {
-  let { id = "5ffb9399b44b660004ba402c" } = useParams();
+  let { id } = useParams();
   console.log("id; ", id);
 
   const [step, setStep] = createSignal<IStep>({} as IStep);
@@ -15,10 +16,10 @@ const Verifier: Component<IPageProps> = (props) => {
   const [error, setError] = createSignal("");
   const [itemId, setItemId] = createSignal<string>(id);
 
-  const blockchainNameAttr =
-    props.blockchainName === "Polygon Matic"
-      ? "polygon_matic_notarization"
-      : "test_eth_notarization";
+  const blockchainNameAttr: string =
+    props.contract.address === chainEnum.POLYGON
+      ? "polygon_matic_v2_notarization"
+      : "sepolia_test_eth_notarization";
 
   const getDevoleumStep = async () => {
     let step: IStep = await getData(

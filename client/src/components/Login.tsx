@@ -22,7 +22,6 @@ const Login: Component<IProps> = (props) => {
       }
     );
     let data = await response.json();
-    console.log(data);
     localStorage.setItem("userInfo", JSON.stringify(data));
     props.onComplete(response.status === 200);
   };
