@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build"
+  command = "vite build || ( npm install vite && vite build )"
   environment = { NODE_VERSION = "16" }
   
 [[redirects]]
