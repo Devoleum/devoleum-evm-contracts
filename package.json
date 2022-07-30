@@ -7,10 +7,11 @@
     "test": "test"
   },
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "test": "npx hardhat test",
-    "dev": "npx vite",
-    "build": "npx vite build",
-    "serve": "npx vite build && npx vite preview"
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite build && vite preview"
   },
   "author": "Lorenzo Zaccagnini",
   "license": "AGPL 3.0",
