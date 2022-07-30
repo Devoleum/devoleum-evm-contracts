@@ -1,9 +1,0 @@
-{
-  "analysis": [],
-  "contract": "/home/runner/work/devoleum-eth-notarization-muninn/devoleum-eth-notarization-muninn/src/Devoleum.sol",
-  "duration": 1.8325836658477783,
-  "end": 1659134875.6561785,
-  "exit_code": 1,
-  "start": 1659134873.8235948,
-  "tool": "oyente"
-}
