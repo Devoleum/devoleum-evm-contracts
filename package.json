@@ -11,7 +11,7 @@
     "test": "npx hardhat test",
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite build && vite preview"
+    "serve": "vite preview"
   },
   "author": "Lorenzo Zaccagnini",
   "license": "AGPL 3.0",
