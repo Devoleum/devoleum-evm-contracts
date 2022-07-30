@@ -118,7 +118,7 @@ const App: Component = () => {
         ) : (
           <div>
             {" "}
-            Please change Metamask network to Polygon Matic or Rinkeby and
+            Please change Metamask network to Polygon Matic or Sepolia and
             refresh the page
           </div>
         )}
