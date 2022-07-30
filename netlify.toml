@@ -1,9 +1,8 @@
 [build]
-  command = "pnpm build || ( npm install pnpm && pnpm build )"
+  command = "npm run build"
   environment = { NODE_VERSION = "16" }
-
-# Opting your Website out of Google's FLoC Network
-[[headers]]
-  for = "/*"
-  [headers.values]
-    Permissions-Policy = "interest-cohort=()"
+  
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
