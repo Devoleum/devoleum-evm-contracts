@@ -7,7 +7,7 @@ import { IPageProps } from "../models/IPage";
 import { chainEnum } from "../models/ContractAddress";
 
 const Verifier: Component<IPageProps> = (props) => {
-  let { id } = useParams();
+  let { id = "" } = useParams();
   console.log("id; ", id);
 
   const [step, setStep] = createSignal<IStep>({} as IStep);

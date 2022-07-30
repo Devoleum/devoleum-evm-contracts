@@ -16,7 +16,11 @@ const NotarizeMany: Component<IPageProps> = (props) => {
       : "sepolia_test_eth_notarization";
 
   onMount(async () => {
-    setIsValidToken(await isValidTokenCheck());
+    try {
+      setIsValidToken(await isValidTokenCheck());
+    } catch (e) {
+      console.log(e);
+    }
   });
 
   const handleSubmit = async (e: any) => {
@@ -49,8 +53,7 @@ const NotarizeMany: Component<IPageProps> = (props) => {
     stepId: string,
     idx: number
   ) => {
-    const valid = await isValidTokenCheck();
-    if (!valid) return null;
+    if (!isValidToken()) return null;
 
     if (!props.signer) return;
     const devoleumWithSigner = props.contract.connect(props.signer);
