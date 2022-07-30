@@ -7,10 +7,10 @@
     "test": "test"
   },
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
+    "preinstall": "npx only-allow pnpm ",
     "test": "npx hardhat test",
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && cp ./client/_redirects ./client/dist/",
     "serve": "vite preview"
   },
   "author": "Lorenzo Zaccagnini",
