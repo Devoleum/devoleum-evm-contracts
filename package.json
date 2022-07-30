@@ -7,10 +7,10 @@
     "test": "test"
   },
   "scripts": {
-    "test": "hardhat test",
-    "dev": "vite",
-    "build": "vite build",
-    "serve": "vite build && vite preview"
+    "test": "npx hardhat test",
+    "dev": "npx vite",
+    "build": "npx vite build",
+    "serve": "npx vite build && npx vite preview"
   },
   "author": "Lorenzo Zaccagnini",
   "license": "AGPL 3.0",
