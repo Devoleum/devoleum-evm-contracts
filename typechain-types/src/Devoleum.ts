@@ -32,6 +32,7 @@ export interface DevoleumInterface extends utils.Interface {
     "createStepProof(bytes32)": FunctionFragment;
     "hashToDate(bytes32)": FunctionFragment;
     "owner()": FunctionFragment;
+    "prev_sc()": FunctionFragment;
     "selfDisableAllowed()": FunctionFragment;
     "toggleAllowed(address)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
@@ -43,6 +44,7 @@ export interface DevoleumInterface extends utils.Interface {
       | "createStepProof"
       | "hashToDate"
       | "owner"
+      | "prev_sc"
       | "selfDisableAllowed"
       | "toggleAllowed"
       | "transferOwnership"
@@ -61,6 +63,7 @@ export interface DevoleumInterface extends utils.Interface {
     values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(functionFragment: "prev_sc", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "selfDisableAllowed",
     values?: undefined
@@ -81,6 +84,7 @@ export interface DevoleumInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "hashToDate", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "prev_sc", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "selfDisableAllowed",
     data: BytesLike
@@ -157,6 +161,8 @@ export interface Devoleum extends BaseContract {
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
+    prev_sc(overrides?: CallOverrides): Promise<[string]>;
+
     selfDisableAllowed(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -189,6 +195,8 @@ export interface Devoleum extends BaseContract {
 
   owner(overrides?: CallOverrides): Promise<string>;
 
+  prev_sc(overrides?: CallOverrides): Promise<string>;
+
   selfDisableAllowed(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -220,6 +228,8 @@ export interface Devoleum extends BaseContract {
     ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<string>;
+
+    prev_sc(overrides?: CallOverrides): Promise<string>;
 
     selfDisableAllowed(overrides?: CallOverrides): Promise<void>;
 
@@ -263,6 +273,8 @@ export interface Devoleum extends BaseContract {
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
+    prev_sc(overrides?: CallOverrides): Promise<BigNumber>;
+
     selfDisableAllowed(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -295,6 +307,8 @@ export interface Devoleum extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    prev_sc(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     selfDisableAllowed(
       overrides?: Overrides & { from?: PromiseOrValue<string> }

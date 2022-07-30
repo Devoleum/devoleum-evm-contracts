@@ -7,9 +7,11 @@ pragma solidity ^0.8.15;
 /// @dev All function calls are currently implemented without side effects
 contract Devoleum {
     address public owner;
+    address public prev_sc;
 
-    constructor() {
+    constructor(address _prev_sc) {
         owner = msg.sender;
+        prev_sc = _prev_sc;
     }
 
     mapping(bytes32 => uint256) public hashToDate;

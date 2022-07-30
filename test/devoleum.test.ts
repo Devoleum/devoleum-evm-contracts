@@ -11,7 +11,9 @@ describe("Devoleum", function () {
 
   beforeEach(async function () {
     const Devoleum = await ethers.getContractFactory("Devoleum");
-    devoleum = await Devoleum.deploy();
+    devoleum = await Devoleum.deploy(
+      "0x0000000000000000000000000000000000000000"
+    );
     await devoleum.deployed();
 
     [owner, addr1, addrAllowed] = await ethers.getSigners();
