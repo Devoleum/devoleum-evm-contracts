@@ -1,0 +1,8 @@
+{
+  "contract": "/home/runner/work/devoleum-evm-contracts/devoleum-evm-contracts/src/Devoleum.sol",
+  "tool": "osiris",
+  "start": 1659282520.4867823,
+  "end": 1659282521.385944,
+  "duration": 0.8991615772247314,
+  "exit_code": 0
+}

@@ -1,0 +1,8 @@
+{
+  "contract": "/home/runner/work/devoleum-evm-contracts/devoleum-evm-contracts/src/Devoleum.sol",
+  "tool": "mythril",
+  "start": 1659282470.8463447,
+  "end": 1659282472.0945413,
+  "duration": 1.2481966018676758,
+  "exit_code": 1
+}
