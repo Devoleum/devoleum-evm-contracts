@@ -1,0 +1,8 @@
+{
+  "contract": "/home/runner/work/devoleum-evm-contracts/devoleum-evm-contracts/src/Devoleum.sol",
+  "tool": "securify",
+  "start": 1659282888.6996257,
+  "end": 1659282889.9600813,
+  "duration": 1.26045560836792,
+  "exit_code": 0
+}

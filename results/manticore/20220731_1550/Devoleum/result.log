@@ -1,0 +1,8 @@
+2022-07-31 15:54:40,537: [16] m.main:INFO: Registered plugins: DetectUninitializedMemory, DetectReentrancyAdvanced, DetectDelegatecall, DetectReentrancySimple, DetectInvalid, DetectUnusedRetVal, DetectEnvInstruction, DetectExternalCallAndLeak, DetectUninitializedStorage, DetectIntegerOverflow, DetectSuicidal
+2022-07-31 15:54:40,537: [16] m.main:INFO: Beginning analysis
+2022-07-31 15:54:40,544: [16] m.e.manticore:INFO: Starting symbolic create contract
+2022-07-31 15:54:40,554: [16] m.e.manticore:ERROR: Errors : Invalid solc compilation Invalid option to --combined-json: compact-format
+
+. Solidity failed to generate bytecode for your contract. Check if all the abstract functions are implemented. 
+2022-07-31 15:54:40,608: [58] m.c.manticore:INFO: Generated testcase No. 0 - NO STATE RESULT (?)(0 txs)
+2022-07-31 15:54:40,711: [16] m.c.manticore:INFO: Results in /mcore_p5kjga04

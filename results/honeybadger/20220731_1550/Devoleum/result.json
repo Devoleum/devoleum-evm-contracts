@@ -1,0 +1,9 @@
+{
+  "analysis": [],
+  "contract": "/home/runner/work/devoleum-evm-contracts/devoleum-evm-contracts/src/Devoleum.sol",
+  "duration": 0.951979398727417,
+  "end": 1659282885.571368,
+  "exit_code": 0,
+  "start": 1659282884.6193886,
+  "tool": "honeybadger"
+}

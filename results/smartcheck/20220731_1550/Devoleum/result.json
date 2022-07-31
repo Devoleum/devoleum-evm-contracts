@@ -1,0 +1,26 @@
+{
+  "analysis": [
+    {
+      "column": 16,
+      "content": "^",
+      "line": 2,
+      "name": "SOLIDITY_PRAGMAS_VERSION",
+      "patternId": "23fc32",
+      "severity": 1
+    },
+    {
+      "column": 4,
+      "content": "constructor(address_prev_sc){owner=msg.sender;prev_sc=_prev_sc;}",
+      "line": 12,
+      "name": "SOLIDITY_VISIBILITY",
+      "patternId": 910067,
+      "severity": 1
+    }
+  ],
+  "contract": "/home/runner/work/devoleum-evm-contracts/devoleum-evm-contracts/src/Devoleum.sol",
+  "duration": 2.628340244293213,
+  "end": 1659282883.6176553,
+  "exit_code": 0,
+  "start": 1659282880.989315,
+  "tool": "smartcheck"
+}

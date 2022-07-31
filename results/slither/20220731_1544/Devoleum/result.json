@@ -1,8 +1,0 @@
-{
-  "contract": "/home/runner/work/devoleum-evm-contracts/devoleum-evm-contracts/src/Devoleum.sol",
-  "duration": 1.6517024040222168,
-  "end": 1659282469.4410067,
-  "exit_code": 255,
-  "start": 1659282467.7893043,
-  "tool": "slither"
-}

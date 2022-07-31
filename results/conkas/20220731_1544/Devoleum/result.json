@@ -1,9 +1,0 @@
-{
-  "analysis": [],
-  "contract": "/home/runner/work/devoleum-evm-contracts/devoleum-evm-contracts/src/Devoleum.sol",
-  "duration": 2.249547243118286,
-  "end": 1659282524.7442124,
-  "exit_code": 1,
-  "start": 1659282522.4946651,
-  "tool": "conkas"
-}
