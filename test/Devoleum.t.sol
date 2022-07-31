@@ -9,6 +9,6 @@ contract DevoleumTest is Test {
     Devoleum d;
 
     function setUp() public {
-        d = new Devoleum();
+        d = new Devoleum(0x0000000000000000000000000000000000000000);
     }
 }
