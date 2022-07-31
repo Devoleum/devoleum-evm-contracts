@@ -1,7 +1,7 @@
 {
-  "name": "muninn-notarizer",
+  "name": "evm-ragnar-contracts",
   "version": "1.0.0",
-  "description": "Devoleum EVM notarizer",
+  "description": "Devoleum EVM ragnar notarizer",
   "directories": {
     "lib": "lib",
     "test": "test"
@@ -27,18 +27,8 @@
     "ethers": "^5.6.6",
     "hardhat": "^2.9.5",
     "hardhat-preprocessor": "^0.1.4",
-    "jsdom": "^20.0.0",
-    "solid-testing-library": "^0.3.0",
     "ts-node": "^10.7.0",
     "typechain": "^8.0.0",
-    "typescript": "^4.6.4",
-    "vite": "^3.0.0",
-    "vite-plugin-solid": "^2.3.0",
-    "vitest": "^0.18.0"
-  },
-  "dependencies": {
-    "hash-wasm": "^4.9.0",
-    "solid-app-router": "^0.4.1",
-    "solid-js": "^1.4.8"
+    "typescript": "^4.6.4"
   }
 }
