@@ -1,0 +1,8 @@
+{
+  "contract": "/home/runner/work/devoleum-evm-contracts/devoleum-evm-contracts/src/Devoleum.sol",
+  "tool": "smartcheck",
+  "start": 1659282516.207085,
+  "end": 1659282518.5159307,
+  "duration": 2.3088457584381104,
+  "exit_code": 0
+}
